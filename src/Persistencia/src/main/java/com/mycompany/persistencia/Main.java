@@ -17,6 +17,6 @@ public class Main {
         EntityManager entityManager = DataBaseConnection.createConnection("website");
         entityManager.getTransaction().begin();
         entityManager.persist(new User("Emir"));
-        entityManager.getTransaction().commit();
+        entityManager.getTransaction().commit();sdfs
     }
 }
