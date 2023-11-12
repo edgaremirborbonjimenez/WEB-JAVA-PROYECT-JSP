@@ -18,5 +18,5 @@ public class Main {
         entityManager.getTransaction().begin();
         entityManager.persist(new User("Emir"));
         entityManager.getTransaction().commit();
-    }
+    }asdasdas
 }
