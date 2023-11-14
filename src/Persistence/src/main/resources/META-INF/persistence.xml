@@ -3,6 +3,15 @@
   <persistence-unit name="webProject" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>domain.User</class>
+    <class>domain.Admor</class>
+    <class>domain.Anclado</class>
+    <class>domain.Comentario</class>
+    <class>domain.Comun</class>
+    <class>domain.Estado</class>
+    <class>domain.Municipio</class>
+    <class>domain.Normal</class>
+    <class>domain.Post</class>
+    <class>domain.Usuario</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/webproject"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

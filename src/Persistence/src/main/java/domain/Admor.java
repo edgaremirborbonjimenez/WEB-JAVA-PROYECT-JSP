@@ -5,16 +5,43 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author JIVB
  */
 @Entity
+@Table(name = "admors")
 public class Admor extends Usuario implements Serializable {
-    @OneToMany(mappedBy = "admor")
+
+    @OneToMany(mappedBy = "admor", cascade = {CascadeType.REMOVE})
     private List<Anclado> anclado;
+
+    public Admor() {
+    }
+
+    public Admor(List<Anclado> anclado, Long id, String nombreCompleto, String correo, String contraseña, String telefono, String avatar, String ciudad, Date fechaNacimiento, String genero, Municipio municipio, List<Comun> comun) {
+        super(id, nombreCompleto, correo, contraseña, telefono, avatar, ciudad, fechaNacimiento, genero, municipio, comun);
+        this.anclado = anclado;
+    }
+
+    public Admor(List<Anclado> anclado, String nombreCompleto, String correo, String contraseña, String telefono, String avatar, String ciudad, Date fechaNacimiento, String genero) {
+        super(nombreCompleto, correo, contraseña, telefono, avatar, ciudad, fechaNacimiento, genero);
+        this.anclado = anclado;
+    }
+
+    public List<Anclado> getAnclado() {
+        return anclado;
+    }
+
+    public void setAnclado(List<Anclado> anclado) {
+        this.anclado = anclado;
+    }
+
 }
