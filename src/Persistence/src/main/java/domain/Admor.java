@@ -5,7 +5,9 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -13,5 +15,6 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Admor extends Usuario implements Serializable {
-    
+    @OneToMany(mappedBy = "Admor")
+    private List<Anclado> anclado;
 }
