@@ -26,6 +26,19 @@ import javax.persistence.TemporalType;
 @Table(name = "post")
 public class Post implements Serializable {
 
+    public Post() {
+    }
+
+    public Post(Long id, Date fechaHoraCreacon, Date fechaHoraEdicion, String titulo, String contenido) {
+        this.id = id;
+        this.fechaHoraCreacon = fechaHoraCreacon;
+        this.fechaHoraEdicion = fechaHoraEdicion;
+        this.titulo = titulo;
+        this.contenido = contenido;
+    }
+    
+    
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
