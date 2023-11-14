@@ -5,7 +5,9 @@
 package domain;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -14,5 +16,6 @@ import javax.persistence.Entity;
 @Entity
 public class Comun extends Post implements Serializable {
 
-    
+    @ManyToOne(cascade = {CascadeType.REMOVE})
+    private Usuario usuario;
 }

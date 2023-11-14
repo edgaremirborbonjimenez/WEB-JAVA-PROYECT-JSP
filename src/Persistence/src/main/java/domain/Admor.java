@@ -15,6 +15,6 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Admor extends Usuario implements Serializable {
-    @OneToMany(mappedBy = "Admor")
+    @OneToMany(mappedBy = "admor")
     private List<Anclado> anclado;
 }

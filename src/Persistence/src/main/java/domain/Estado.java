@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -27,6 +28,7 @@ public class Estado implements Serializable {
     @Column(name = "nombre", nullable = false, length = 30)
     private String nombre;
     
+    @OneToMany(mappedBy = "estado")
     private List<Municipio> municipios;
 
     public Estado() {

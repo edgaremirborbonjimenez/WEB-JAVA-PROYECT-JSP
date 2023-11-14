@@ -5,11 +5,15 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -26,7 +30,11 @@ public class Municipio implements Serializable {
     @Column(name = "nombre", nullable = false, length = 30)
     private String nombre;
     
+    @ManyToOne(cascade = {CascadeType.REMOVE})
     private Estado estado;
+    
+    @OneToMany(mappedBy = "usuarios")
+    private List<Usuario> usuarios;
 
     public Municipio() {
     }
