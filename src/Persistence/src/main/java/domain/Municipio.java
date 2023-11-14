@@ -12,36 +12,64 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author JIVB
  */
 @Entity
+@Table(name = "municipios")
 public class Municipio implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(name = "nombre", nullable = false, length = 30)
     private String nombre;
-    
+
     @ManyToOne(cascade = {CascadeType.REMOVE})
+    @JoinColumn(name = "estadoID", nullable = false)
     private Estado estado;
-    
-    @OneToMany(mappedBy = "usuarios")
+
+    @OneToMany(mappedBy = "municipio")
     private List<Usuario> usuarios;
 
     public Municipio() {
     }
 
-    public Municipio(Long id, String nombre) {
+    public Municipio(Long id, String nombre, Estado estado, List<Usuario> usuarios) {
         this.id = id;
         this.nombre = nombre;
+        this.estado = estado;
+        this.usuarios = usuarios;
+    }
+
+    public Municipio(String nombre, Estado estado, List<Usuario> usuarios) {
+        this.id = id;
+        this.nombre = nombre;
+        this.estado = estado;
+        this.usuarios = usuarios;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
     public Long getId() {
@@ -59,7 +87,5 @@ public class Municipio implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    
-    
+
 }

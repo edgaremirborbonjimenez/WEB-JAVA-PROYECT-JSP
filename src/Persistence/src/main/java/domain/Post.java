@@ -31,26 +31,33 @@ public class Post implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @Column(name= "fechaHoraCreacion")
+
+    @Column(name = "fechaHoraCreacion")
     @Temporal(TemporalType.DATE)
     private Date fechaHoraCreacon;
-    
-    @Column(name= "fechaHoraEdicion")
+
+    @Column(name = "fechaHoraEdicion",nullable = true)
     @Temporal(TemporalType.DATE)
     private Date fechaHoraEdicion;
-    
+
     @Column(name = "titulo", length = 50, nullable = false)
     private String titulo;
-    
+
     @Column(name = "contenido", length = 50, nullable = false)
     private String contenido;
-    
+
     public Post() {
     }
 
     public Post(Long id, Date fechaHoraCreacon, Date fechaHoraEdicion, String titulo, String contenido) {
         this.id = id;
+        this.fechaHoraCreacon = fechaHoraCreacon;
+        this.fechaHoraEdicion = fechaHoraEdicion;
+        this.titulo = titulo;
+        this.contenido = contenido;
+    }
+
+    public Post(Date fechaHoraCreacon, Date fechaHoraEdicion, String titulo, String contenido) {
         this.fechaHoraCreacon = fechaHoraCreacon;
         this.fechaHoraEdicion = fechaHoraEdicion;
         this.titulo = titulo;
@@ -121,5 +128,5 @@ public class Post implements Serializable {
     public String toString() {
         return "domain.Post[ id=" + id + " ]";
     }
-    
+
 }

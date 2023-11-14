@@ -12,31 +12,45 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author JIVB
  */
 @Entity
+@Table(name = "estados")
 public class Estado implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(name = "nombre", nullable = false, length = 30)
     private String nombre;
-    
+
     @OneToMany(mappedBy = "estado")
     private List<Municipio> municipios;
 
     public Estado() {
     }
 
-    public Estado(Long id, String nombre) {
+    public Estado(Long id, String nombre, List<Municipio> municipios) {
         this.id = id;
         this.nombre = nombre;
+        this.municipios = municipios;
+    }
+
+    public Estado(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public List<Municipio> getMunicipios() {
+        return municipios;
+    }
+
+    public void setMunicipios(List<Municipio> municipios) {
+        this.municipios = municipios;
     }
 
     public Long getId() {
@@ -55,5 +69,4 @@ public class Estado implements Serializable {
         this.nombre = nombre;
     }
 
-    
 }
