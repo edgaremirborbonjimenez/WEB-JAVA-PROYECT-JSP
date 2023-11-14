@@ -23,6 +23,7 @@ import javax.persistence.TemporalType;
  */
 //@jakarta.persistence.Entity
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "post")
 public class Post implements Serializable {
 
