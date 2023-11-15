@@ -1,23 +1,30 @@
-
 package dao.implementation;
 
 import dao.interfaces.PostDAO;
 import db.DataBaseConnection;
+import domain.Post;
 import javax.persistence.EntityManager;
 
-
-public class Post implements PostDAO {
+public class PostDAOImpl implements PostDAO {
 
     EntityManager entityManager;
+    static PostDAOImpl postDAOImpl;
 
-    public Post(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    private PostDAOImpl() {
+        this.entityManager = DataBaseConnection.createConnection("webProject");
     }
-    
+
+    public static PostDAOImpl getInstancePostDAOImpl() {
+
+        if (postDAOImpl == null) {
+            postDAOImpl = new PostDAOImpl();
+        }
+        return postDAOImpl;
+    }
+
     @Override
-    public domain.Post crearPost(domain.Post post) {
-        
-        entityManager = DataBaseConnection.createConnection("webProject");
+    public Post crearPost(Post post) {
+
         entityManager.getTransaction().begin();
 
         entityManager.persist(post);
@@ -28,33 +35,27 @@ public class Post implements PostDAO {
     }
 
     @Override
-    public domain.Post eliminarPost(Long id) {
-     
-        domain.Post postEliminado = null;
+    public Post eliminarPost(Long id) {
 
-        entityManager = DataBaseConnection.createConnection("webProject");
         entityManager.getTransaction().begin();
 
-        postEliminado = entityManager.find(domain.Post.class, id);
-        
+        Post postEliminado = entityManager.find(Post.class, id);
+
         if (postEliminado != null) {
-                entityManager.remove(postEliminado);
-            }
+            entityManager.remove(postEliminado);
+        }
         entityManager.getTransaction().commit();
-        
+
         return postEliminado;
 
     }
 
     @Override
-    public domain.Post editarPost(Long id, String titulo, String contenido) {
+    public Post editarPost(Long id, String titulo, String contenido) {
 
-        domain.Post postEditado = null;
-
-        entityManager = DataBaseConnection.createConnection("webProject");
         entityManager.getTransaction().begin();
 
-        postEditado = entityManager.find(domain.Post.class, id);
+        Post postEditado = entityManager.find(Post.class, id);
 
         if (postEditado != null) {
             postEditado.setTitulo(titulo);
@@ -66,5 +67,5 @@ public class Post implements PostDAO {
 
         return postEditado;
     }
-    
+
 }

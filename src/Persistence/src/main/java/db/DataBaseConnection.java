@@ -12,12 +12,9 @@ import javax.persistence.Persistence;
  *
  * @author edemb
  */
-public class DataBaseConnection {
+public abstract class DataBaseConnection {
 
     static EntityManager connection;
-
-    private DataBaseConnection() {
-    }
 
     public static EntityManager createConnection(String persistenceUnitName) {
         if (DataBaseConnection.connection == null) {
