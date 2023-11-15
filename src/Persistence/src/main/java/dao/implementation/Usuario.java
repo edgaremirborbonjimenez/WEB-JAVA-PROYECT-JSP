@@ -8,11 +8,17 @@ import javax.persistence.TypedQuery;
 
 
 public class Usuario implements UsuarioDAO {
+    
+    EntityManager entityManager;
+
+    public Usuario(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     @Override
     public domain.Usuario registrarUsuario(domain.Usuario usuario) {
         
-        EntityManager entityManager = DataBaseConnection.createConnection("webProject");
+        entityManager = DataBaseConnection.createConnection("webProject");
         entityManager.getTransaction().begin();
         
         entityManager.persist(usuario);
@@ -24,7 +30,7 @@ public class Usuario implements UsuarioDAO {
 
     @Override
     public domain.Usuario consultarUsuario(String correo, String contrasenia) {
-          EntityManager entityManager = DataBaseConnection.createConnection("webProject");
+           entityManager = DataBaseConnection.createConnection("webProject");
 
             String jpql = "SELECT u FROM Usuario u WHERE u.correo = :correo AND u.contrasenia = :contrasenia";
             TypedQuery<domain.Usuario> consulta = entityManager.createQuery(jpql, domain.Usuario.class);

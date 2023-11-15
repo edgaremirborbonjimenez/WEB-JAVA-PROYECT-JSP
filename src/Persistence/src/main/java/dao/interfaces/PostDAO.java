@@ -10,5 +10,5 @@ public interface PostDAO {
     
     public Post eliminarPost(Long id);
     
-    public Post editarPost(String titulo, String contenido);
+    public Post editarPost(Long id, String titulo, String contenido);
 }
