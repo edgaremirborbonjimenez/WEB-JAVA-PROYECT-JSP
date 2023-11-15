@@ -2,6 +2,7 @@
 package dao.implementation;
 
 import dao.interfaces.ComentarioDAO;
+import db.DataBaseConnection;
 import javax.persistence.EntityManager;
 
 public class Comentario implements ComentarioDAO {
@@ -14,12 +15,33 @@ public class Comentario implements ComentarioDAO {
 
     @Override
     public domain.Comentario crearComentario(domain.Comentario comentario) {
-       return null;
+       
+        entityManager = DataBaseConnection.createConnection("webProject");
+        entityManager.getTransaction().begin();
+        
+        entityManager.persist(comentario);
+        
+        entityManager.getTransaction().commit();
+        
+        return comentario;
     }
 
     @Override
     public domain.Comentario eliminarComentario(Long id) {
-        return null;
+        
+         domain.Comentario comentarioEliminado = null;
+
+        entityManager = DataBaseConnection.createConnection("webProject");
+        entityManager.getTransaction().begin();
+
+        comentarioEliminado = entityManager.find(domain.Comentario.class, id);
+        
+        if (comentarioEliminado != null) {
+                entityManager.remove(comentarioEliminado);
+            }
+        entityManager.getTransaction().commit();
+        
+        return comentarioEliminado;
     }
     
 }

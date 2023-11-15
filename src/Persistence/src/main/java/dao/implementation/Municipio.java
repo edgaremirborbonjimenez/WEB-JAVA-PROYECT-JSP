@@ -2,6 +2,7 @@
 package dao.implementation;
 
 import dao.interfaces.MunicipioDAO;
+import db.DataBaseConnection;
 import javax.persistence.EntityManager;
 
 
@@ -15,7 +16,15 @@ public class Municipio implements MunicipioDAO {
     
     @Override
     public domain.Municipio registrarMunicipio(domain.Municipio municipio) {
-       return null;
+       
+        entityManager = DataBaseConnection.createConnection("webProject");
+        entityManager.getTransaction().begin();
+        
+        entityManager.persist(municipio);
+        
+        entityManager.getTransaction().commit();
+        
+        return municipio;
     }
     
 }
