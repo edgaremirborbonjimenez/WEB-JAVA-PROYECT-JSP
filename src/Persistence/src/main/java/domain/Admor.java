@@ -31,8 +31,8 @@ public class Admor extends Usuario implements Serializable {
         this.anclado = anclado;
     }
 
-    public Admor(List<Anclado> anclado, String nombreCompleto, String correo, String contraseña, String telefono, String avatar, String ciudad, Date fechaNacimiento, String genero) {
-        super(nombreCompleto, correo, contraseña, telefono, avatar, ciudad, fechaNacimiento, genero);
+    public Admor(List<Anclado> anclado, String nombreCompleto, String correo, String contraseña, String telefono, String avatar, String ciudad, Date fechaNacimiento, String genero,Municipio municipio) {
+        super(nombreCompleto, correo, contraseña, telefono, avatar, ciudad, fechaNacimiento, genero,municipio);
         this.anclado = anclado;
     }
 
