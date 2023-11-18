@@ -31,8 +31,8 @@ public class Normal extends Usuario implements Serializable {
         this.comentarios = comentarios;
     }
 
-    public Normal(List<Comentario> comentarios, String nombreCompleto, String correo, String contraseña, String telefono, String avatar, String ciudad, Date fechaNacimiento, String genero) {
-        super(nombreCompleto, correo, contraseña, telefono, avatar, ciudad, fechaNacimiento, genero);
+    public Normal(List<Comentario> comentarios, String nombreCompleto, String correo, String contraseña, String telefono, String avatar, String ciudad, Date fechaNacimiento, String genero,Municipio municipio) {
+        super(nombreCompleto, correo, contraseña, telefono, avatar, ciudad, fechaNacimiento, genero,municipio);
         this.comentarios = comentarios;
     }
 

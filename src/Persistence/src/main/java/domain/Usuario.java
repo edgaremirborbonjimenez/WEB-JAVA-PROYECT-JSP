@@ -85,7 +85,7 @@ public class Usuario implements Serializable {
         this.comun = comun;
     }
 
-    public Usuario(String nombreCompleto, String correo, String contraseña, String telefono, String avatar, String ciudad, Date fechaNacimiento, String genero) {
+    public Usuario(String nombreCompleto, String correo, String contraseña, String telefono, String avatar, String ciudad, Date fechaNacimiento, String genero,Municipio municipio) {
         this.nombreCompleto = nombreCompleto;
         this.correo = correo;
         this.contraseña = contraseña;
@@ -94,6 +94,7 @@ public class Usuario implements Serializable {
         this.ciudad = ciudad;
         this.fechaNacimiento = fechaNacimiento;
         this.genero = genero;
+        this.municipio = municipio;
     }
 
     public Municipio getMunicipio() {

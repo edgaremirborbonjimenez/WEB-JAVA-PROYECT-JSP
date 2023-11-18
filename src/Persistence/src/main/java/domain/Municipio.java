@@ -32,7 +32,7 @@ public class Municipio implements Serializable {
     @Column(name = "nombre", nullable = false, length = 30)
     private String nombre;
 
-    @ManyToOne(cascade = {CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.REMOVE,CascadeType.PERSIST})
     @JoinColumn(name = "estadoID", nullable = false)
     private Estado estado;
 
@@ -49,7 +49,7 @@ public class Municipio implements Serializable {
         this.usuarios = usuarios;
     }
 
-    public Municipio(String nombre, Estado estado, List<Usuario> usuarios) {
+    public Municipio(String nombre, Estado estado) {
         this.id = id;
         this.nombre = nombre;
         this.estado = estado;
