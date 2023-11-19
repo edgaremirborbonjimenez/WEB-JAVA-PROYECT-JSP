@@ -3,6 +3,7 @@ package dao.implementation;
 import dao.interfaces.PostDAO;
 import db.DataBaseConnection;
 import domain.Post;
+import java.util.Date;
 import javax.persistence.EntityManager;
 
 public class PostDAOImpl implements PostDAO {
@@ -60,6 +61,7 @@ public class PostDAOImpl implements PostDAO {
         if (postEditado != null) {
             postEditado.setTitulo(titulo);
             postEditado.setContenido(contenido);
+            postEditado.setFechaHoraEdicion(new Date());
             entityManager.merge(postEditado);
         }
 
