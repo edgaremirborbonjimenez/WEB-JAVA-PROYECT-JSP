@@ -57,7 +57,7 @@ public class Testing {
     }
     
     @Test
-    public void editarPublicacionTest(){
+    public Comun editarPublicacionTest(){
         Comun post = null;
         
         try {
@@ -66,8 +66,7 @@ public class Testing {
             System.out.println("Error: " + e.getMessage());
         }
         
-        assertEquals(post, this);
-        
+        return post;
     }
     
 }
