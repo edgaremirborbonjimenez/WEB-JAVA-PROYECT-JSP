@@ -46,14 +46,28 @@ public class Testing {
     public void crearPublicacionTest(){
         Post post = null;
         Usuario user = null;
-        try {
-            Municipio municipios = fachadaPersistenia.registrarMunicipio(new Municipio("Puebla", new Estado("Nacho")));
-            user = fachadaPersistenia.registrarUsuario(new Usuario("Antonio", "antonio@gmail.com", "1234", "1234556778", "Perro", "Navojoa", new Date(), "Hombre",municipios));
-
-            post = fachadaPersistenia.crearPost(new Comun(user, null, new Date(2023, 11, 18, 16, 18, 33), null, "Prueba post", "Los quiero como test"));
+        try {            
+            user = fachadaPersistenia.consultarUsuario("antonio@gmail.com", "1234");
+            post = fachadaPersistenia.crearPost(new Comun(user, null, new Date(), null, "Prueba post", "Los quiero como test"));
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+        
+        assertNull(post);
+    }
+    
+    @Test
+    public void editarPublicacionTest(){
+        Comun post = null;
+        
+        try {
+            post = (Comun) fachadaPersistenia.editarPost(1L, "Post editado", "Edite el post");
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        
+        assertEquals(post, this);
+        
     }
     
 }
