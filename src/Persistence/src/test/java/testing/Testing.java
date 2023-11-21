@@ -5,6 +5,7 @@ package testing;
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
 import dao.interfaces.Persistencia;
+import domain.Comentario;
 import domain.Comun;
 import domain.Estado;
 import domain.Municipio;
@@ -68,5 +69,33 @@ public class Testing {
         
         return post;
     }
+    
+//     @Test
+//    public void crearComentarioTest(){
+//        Comentario comentario = null;
+//        Usuario user = null;
+//        try {            
+//            user = fachadaPersistenia.consultarUsuario("antonio@gmail.com", "1234");
+//            comentario = fachadaPersistenia.crearComentario(new Comentario(new Date(), "Prueba comentario",new Comun(user, 
+//                    null, new Date(), null, "Prueba", "Comentario"), null));
+//        } catch (Exception e) {
+//            System.out.println("Error: " + e.getMessage());
+//        }
+//        
+//        assertNull(comentario);
+//    }
+//    
+//    @Test
+//    public Comun editarPublicacionTest(){
+//        Comun post = null;
+//        
+//        try {
+//            post = (Comun) fachadaPersistenia.editarPost(1L, "Post editado", "Edite el post");
+//        } catch (Exception e) {
+//            System.out.println("Error: " + e.getMessage());
+//        }
+//        
+//        return post;
+//    }
     
 }
