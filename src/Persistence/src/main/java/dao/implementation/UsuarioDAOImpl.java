@@ -37,8 +37,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     @Override
     public Usuario consultarUsuario(String correo, String contrasenia) {
 
-        String jpql = "SELECT u FROM Usuario u WHERE u.correo = :correo AND u.contraseña = :contrasenia";
-        TypedQuery<Usuario> consulta = entityManager.createQuery(jpql, Usuario.class);
+        String query = "SELECT u FROM Usuario u WHERE u.correo = :correo AND u.contraseña = :contraseña";
+        TypedQuery<Usuario> consulta = entityManager.createQuery(query, Usuario.class);
         consulta.setParameter("correo", correo);
         consulta.setParameter("contraseña", contrasenia);
 

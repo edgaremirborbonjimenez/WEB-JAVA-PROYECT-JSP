@@ -48,16 +48,20 @@ public class Testing {
         Usuario user = null;
         try {            
             user = fachadaPersistenia.consultarUsuario("antonio@gmail.com", "1234");
-            post = fachadaPersistenia.crearPost(new Comun(user, null, new Date(), null, "Prueba post", "Los quiero como test"));
+            Comun comun = new Comun();
+            comun.setUsuario(user);
+            comun.setContenido("Los quiero como test");
+            comun.setFechaHoraCreacon(new Date());
+            comun.setTitulo("Prueba post");
+            post = fachadaPersistenia.crearPost(comun);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        
-        assertNull(post);
+        assertNotNull(post.getId());
     }
     
     @Test
-    public Comun editarPublicacionTest(){
+    public void editarPublicacionTest(){
         Comun post = null;
         
         try {
@@ -66,7 +70,7 @@ public class Testing {
             System.out.println("Error: " + e.getMessage());
         }
         
-        return post;
+        assertNotNull(post);
     }
     
 }
