@@ -20,6 +20,7 @@ public interface Persistencia {
     Post crearPost(Post post)throws Exception;
     Post eliminarPost(Long id)throws Exception;
     Post editarPost(Long id, String titulo, String contenido)throws Exception;
+    Post getPostById(Long id) throws Exception;
     Municipio registrarMunicipio(Municipio municipio)throws Exception;
     Estado registrarEstado(Estado estado)throws Exception;
     Comentario crearComentario(Comentario comentario)throws Exception;

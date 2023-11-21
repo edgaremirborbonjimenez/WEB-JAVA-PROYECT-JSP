@@ -9,6 +9,7 @@ import domain.Comentario;
 import domain.Comun;
 import domain.Estado;
 import domain.Municipio;
+import domain.Normal;
 import domain.Post;
 import domain.Usuario;
 import fachada.FachadaPersistencia;
@@ -34,7 +35,7 @@ public class Testing {
         try {
             Municipio municipios = fachadaPersistenia.registrarMunicipio(new Municipio("Puebla", new Estado("Nacho")));
 
-            usuer = fachadaPersistenia.registrarUsuario(new Usuario("Antonio", "antonio@gmail.com", "1234", "1234556778", "Perro", "Navojoa", new Date(), "Hombre",municipios));
+            usuer = fachadaPersistenia.registrarUsuario(new Usuario("Antonio", "antonio@gmail.com", "1234", "1234556778", "Perro", "Navojoa", new Date(), "Hombre", municipios));
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -44,10 +45,10 @@ public class Testing {
     }
 
     @Test
-    public void crearPublicacionTest(){
+    public void crearPublicacionComunTest() {
         Post post = null;
         Usuario user = null;
-        try {            
+        try {
             user = fachadaPersistenia.consultarUsuario("antonio@gmail.com", "1234");
             Comun comun = new Comun();
             comun.setUsuario(user);
@@ -60,46 +61,40 @@ public class Testing {
         }
         assertNotNull(post.getId());
     }
-    
+
     @Test
-    public void editarPublicacionTest(){
+    public void editarPublicacionComunTest() {
         Comun post = null;
-        
+
         try {
             post = (Comun) fachadaPersistenia.editarPost(1L, "Post editado", "Edite el post");
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        
+
         assertNotNull(post);
     }
-    
-//     @Test
-//    public void crearComentarioTest(){
-//        Comentario comentario = null;
-//        Usuario user = null;
-//        try {            
-//            user = fachadaPersistenia.consultarUsuario("antonio@gmail.com", "1234");
-//            comentario = fachadaPersistenia.crearComentario(new Comentario(new Date(), "Prueba comentario",new Comun(user, 
-//                    null, new Date(), null, "Prueba", "Comentario"), null));
-//        } catch (Exception e) {
-//            System.out.println("Error: " + e.getMessage());
-//        }
-//        
-//        assertNull(comentario);
-//    }
-//    
-//    @Test
-//    public Comun editarPublicacionTest(){
-//        Comun post = null;
-//        
-//        try {
-//            post = (Comun) fachadaPersistenia.editarPost(1L, "Post editado", "Edite el post");
-//        } catch (Exception e) {
-//            System.out.println("Error: " + e.getMessage());
-//        }
-//        
-//        return post;
-//    }
-    
+
+    @Test
+    public void crearComentarioTest() {
+        Comentario comentario = null;
+        Normal user = null;
+        Comun post = null;
+        try {
+            user = (Normal) fachadaPersistenia.consultarUsuario("juanperez@gmail.com", "abcde12345");
+            post = (Comun) fachadaPersistenia.getPostById(8L);
+            Comentario c = new Comentario();
+            c.setNormal(user);
+            c.setFechaHora(new Date());
+            c.setContenido("Un nuevo comentario");
+            c.setComun(post);
+
+            comentario = fachadaPersistenia.crearComentario(c);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        assertNotNull(comentario);
+    }
+
 }

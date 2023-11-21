@@ -70,4 +70,17 @@ public class PostDAOImpl implements PostDAO {
         return postEditado;
     }
 
+    @Override
+    public Post getPostById(Long id) {
+
+        entityManager.getTransaction().begin();
+
+        Post post = entityManager.find(Post.class, id);
+
+        entityManager.getTransaction().commit();
+
+        return post;
+
+    }
+
 }
