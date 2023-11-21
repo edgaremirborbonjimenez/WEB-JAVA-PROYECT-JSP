@@ -5,8 +5,10 @@ package testing;
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
 import dao.interfaces.Persistencia;
+import domain.Comun;
 import domain.Estado;
 import domain.Municipio;
+import domain.Post;
 import domain.Usuario;
 import fachada.FachadaPersistencia;
 import java.util.Date;
@@ -40,4 +42,31 @@ public class Testing {
         assertNotNull(usuer);
     }
 
+    @Test
+    public void crearPublicacionTest(){
+        Post post = null;
+        Usuario user = null;
+        try {            
+            user = fachadaPersistenia.consultarUsuario("antonio@gmail.com", "1234");
+            post = fachadaPersistenia.crearPost(new Comun(user, null, new Date(), null, "Prueba post", "Los quiero como test"));
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        
+        assertNull(post);
+    }
+    
+    @Test
+    public Comun editarPublicacionTest(){
+        Comun post = null;
+        
+        try {
+            post = (Comun) fachadaPersistenia.editarPost(1L, "Post editado", "Edite el post");
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        
+        return post;
+    }
+    
 }
