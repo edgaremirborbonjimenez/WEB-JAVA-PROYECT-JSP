@@ -1,0 +1,33 @@
+body{
+	font-family: sans-serif;
+}
+header{
+	margin: -10px;
+	background: rgb(253, 255, 140, 1.0);
+	font-size: 20px;
+	display: flex;
+	border-bottom: solid black;
+}
+.w{
+	width: 80%;
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+.b{
+	color: black;
+}
+form{
+	margin: 10px;
+	padding: 10px;
+	max-width: 450px;
+	display: inline-block;
+}
+input{
+	margin: 10px;
+}
+textarea{
+	margin: 10px;
+}
+button{
+	margin: 10px;	
+}
