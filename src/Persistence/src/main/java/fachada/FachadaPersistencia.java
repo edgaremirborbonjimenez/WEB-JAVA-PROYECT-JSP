@@ -57,11 +57,14 @@ public class FachadaPersistencia implements Persistencia {
 
         }
     }
-    
-    
-        @Override
-    public Usuario consultarUsuarioByEmail(String correo) {
+
+    @Override
+    public Usuario consultarUsuarioByEmail(String correo)throws Exception{
+        try {
             return usuarioDAO.conusltarUsuarioByCorreo(correo);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     @Override

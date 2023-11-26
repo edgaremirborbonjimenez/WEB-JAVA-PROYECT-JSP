@@ -40,10 +40,10 @@ public class Post implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaHoraEdicion;
 
-    @Column(name = "titulo", length = 50, nullable = false)
+    @Column(name = "titulo", length = 30, nullable = false)
     private String titulo;
 
-    @Column(name = "contenido", length = 50, nullable = false)
+    @Column(name = "contenido", length = 500, nullable = false)
     private String contenido;
 
     public Post() {
