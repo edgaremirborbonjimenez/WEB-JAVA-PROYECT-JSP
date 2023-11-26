@@ -40,7 +40,7 @@ main{
     height: 20px;
 }
 
-button{
+.button{
     background-color: white;
     font-weight: bold;
     margin-top: 10%;

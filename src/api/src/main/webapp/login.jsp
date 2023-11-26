@@ -19,6 +19,7 @@
         <span class="id">Feizbuk</span>
     </header>
     <main>
+        <form method="post" action="Login">
         <div class="txtIS">Iniciar Sesión</div>
         <div class="txt">Email:</div>
         <div class="inputDiv"><input class="input" type="text"></div>
@@ -27,10 +28,11 @@
             <input id="psw" class="input" type="password"><br>
             <input id="chck" type="checkbox">Mostrar Contraseña
         </div>
-        <button onclick="muestraMensaje()">Iniciar Sesión</button><br>
+        <input class="button" type="submit" value="Iniciar Sesión"><br>
         <div class="a">
             <a href="http://localhost:8080/api/Login">¿no tienes cuenta? haz click aquí</a>
         </div>
+        </form>
     </main>
     <script src='login.js'></script>
 </body>
