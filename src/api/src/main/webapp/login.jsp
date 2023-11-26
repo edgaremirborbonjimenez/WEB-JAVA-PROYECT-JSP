@@ -18,19 +18,19 @@
     <header>
         <span class="id">Feizbuk</span>
     </header>
-    <main>
+    <main class="login">
         <form method="post" action="Login">
         <div class="txtIS">Iniciar Sesión</div>
         <div class="txt">Email:</div>
-        <div class="inputDiv"><input class="input" type="text"></div>
+        <div class="inputDiv"><input name="email" class="input" type="text"></div>
         <div class="txt">Contraseña:</div>
         <div class="inputDiv">
-            <input id="psw" class="input" type="password"><br>
+            <input name="password" id="psw" class="input" type="password"><br>
             <input id="chck" type="checkbox">Mostrar Contraseña
         </div>
         <input class="button" type="submit" value="Iniciar Sesión"><br>
         <div class="a">
-            <a href="http://localhost:8080/api/Login">¿no tienes cuenta? haz click aquí</a>
+            <a href="http://localhost:8080/api/sigin.jsp">¿no tienes cuenta? haz click aquí</a>
         </div>
         </form>
     </main>

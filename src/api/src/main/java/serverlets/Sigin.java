@@ -5,6 +5,8 @@
 package serverlets;
 
 import dao.interfaces.Persistencia;
+import domain.Estado;
+import domain.Municipio;
 import domain.Usuario;
 import fachada.FachadaPersistencia;
 import java.io.IOException;
@@ -14,13 +16,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 /**
  *
  * @author edemb
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
+@WebServlet(name = "Sigin", urlPatterns = {"/Sigin"})
+public class Sigin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,7 +42,7 @@ public class Login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Login</title>");
+            out.println("<title>Servlet Sigin</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Error " + error + "</h1>");
@@ -60,8 +63,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        response.sendRedirect("/login.jsp");
+//        processRequest(request, response);
     }
 
     /**
@@ -75,24 +77,42 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+//        processRequest(request, response);
+        String name = request.getParameter("name");
+        String fotoPerfil = request.getParameter("fotoPerfil");
+        var birthday = request.getParameter("birthday");
+        System.out.println(birthday);
+        String genero = request.getParameter("genero");
+        String phone = request.getParameter("phone");
+        String city = request.getParameter("city");
         String email = request.getParameter("email");
+        String municipio = request.getParameter("municipio");
+        String estado = request.getParameter("estado");
         String password = request.getParameter("password");
-        try {
 
+        try {
             Persistencia p = new FachadaPersistencia();
-            Usuario u = p.consultarUsuario(email, password);
-            if (u != null) {
-                request.setAttribute("email", email);
-                request.setAttribute("password", password);
-                getServletContext().getRequestDispatcher("/sigin.jsp")
-                        .forward(request, response);
+            Usuario u = p.consultarUsuarioByEmail(email);
+            if (u == null) {
+                Usuario newUser = new Usuario();
+                newUser.setNombreCompleto(name);
+                newUser.setAvatar(fotoPerfil);
+                newUser.setContraseña(password);
+                newUser.setCorreo(email);
+                newUser.setFechaNacimiento(new Date());
+                newUser.setGenero(genero);
+                newUser.setCiudad(city);
+                newUser.setTelefono(phone);
+                newUser.setMunicipio(new Municipio(municipio, new Estado(estado)));
+                newUser = p.registrarUsuario(newUser);
+                if (newUser.getId() != null) {
+                    response.sendRedirect("/api/login.jsp");
+                }
             }
+            response.sendRedirect("/api/sigin.jsp");
         } catch (Exception e) {
             processErrorRequest(response, e.getMessage());
         }
-        //response.sendRedirect("");
-
     }
 
     /**

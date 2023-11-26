@@ -61,7 +61,7 @@ public class Usuario implements Serializable {
     @Column(name = "genero", nullable = false, length = 10)
     private String genero;
 
-    @ManyToOne(cascade = {CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.REMOVE,CascadeType.PERSIST})
     @JoinColumn(name = "municipioID", nullable = false)
     private Municipio municipio;
 
