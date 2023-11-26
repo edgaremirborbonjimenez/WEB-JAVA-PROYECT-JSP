@@ -4,7 +4,9 @@ import dao.interfaces.PostDAO;
 import db.DataBaseConnection;
 import domain.Post;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 public class PostDAOImpl implements PostDAO {
 
@@ -80,6 +82,21 @@ public class PostDAOImpl implements PostDAO {
         entityManager.getTransaction().commit();
 
         return post;
+
+    }
+
+    @Override
+    public List<Post> getAllPosts() {
+
+        try {
+            String query = "SELECT p FROM Post p";
+            TypedQuery<Post> consulta = entityManager.createQuery(query, Post.class);
+
+            List<Post> posts = consulta.getResultList();
+            return posts;
+        } catch (Exception e) {
+            return null;
+        }
 
     }
 

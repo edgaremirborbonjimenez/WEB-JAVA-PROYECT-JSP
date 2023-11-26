@@ -17,6 +17,7 @@ import domain.Estado;
 import domain.Municipio;
 import domain.Post;
 import domain.Usuario;
+import java.util.List;
 
 /**
  *
@@ -55,6 +56,12 @@ public class FachadaPersistencia implements Persistencia {
             throw new Exception(e.getMessage());
 
         }
+    }
+    
+    
+        @Override
+    public Usuario consultarUsuarioByEmail(String correo) {
+            return usuarioDAO.conusltarUsuarioByCorreo(correo);
     }
 
     @Override
@@ -132,6 +139,17 @@ public class FachadaPersistencia implements Persistencia {
 
         try {
             return postDAO.getPostById(id);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+
+    }
+
+    @Override
+    public List<Post> getAllPosts() throws Exception {
+
+        try {
+            return postDAO.getAllPosts();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

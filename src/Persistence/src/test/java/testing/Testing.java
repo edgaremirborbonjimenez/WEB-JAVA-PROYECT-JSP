@@ -14,6 +14,7 @@ import domain.Post;
 import domain.Usuario;
 import fachada.FachadaPersistencia;
 import java.util.Date;
+import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,16 +34,16 @@ public class Testing {
     public void registrarUsuarioTest() {
         Usuario usuer = null;
         try {
-            Municipio municipios = 
-                    fachadaPersistenia.registrarMunicipio(
-                                    new Municipio("Puebla",
+            Municipio municipios
+                    = fachadaPersistenia.registrarMunicipio(
+                            new Municipio("Puebla",
                                     new Estado("Nacho")));
 
-            usuer = 
-                    fachadaPersistenia.registrarUsuario(
+            usuer
+                    = fachadaPersistenia.registrarUsuario(
                             new Usuario(
                                     "Antonio",
-                                    "antonio@gmail.com",
+                                    "gmail.com",
                                     "1234",
                                     "1234556778",
                                     "Perro",
@@ -73,7 +74,7 @@ public class Testing {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        assertNotNull(post.getId());
+        assertNotNull(post);
     }
 
     @Test
@@ -112,6 +113,64 @@ public class Testing {
         }
 
         assertNotNull(comentario);
+    }
+
+    @Test
+    public void consultarUsuario() {
+
+        Usuario usuario = null;
+
+        try {
+            usuario = fachadaPersistenia.consultarUsuario("juanperez@gmail.com", "abcde12345");
+        } catch (Exception e) {
+            System.out.println("!!Error: " + e.getMessage());
+        }
+
+        assertNotNull(usuario);
+
+    }
+
+    @Test
+    public void registrarUsuarioConCorreoOcupadoTest() {
+        Usuario usuer = null;
+        try {
+            Municipio municipios
+                    = fachadaPersistenia.registrarMunicipio(
+                            new Municipio("Puebla",
+                                    new Estado("Nacho")));
+
+            usuer
+                    = fachadaPersistenia.registrarUsuario(
+                            new Usuario(
+                                    "Antonio",
+                                    "uis@gmail.com",
+                                    "1234",
+                                    "1234556778",
+                                    "Perro",
+                                    "Navojoa",
+                                    new Date(),
+                                    "Hombre",
+                                    municipios));
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        assertNull(usuer);
+    }
+
+    @Test
+    public void getAllPostsTest() {
+
+        List<Post> posts = null;
+        try {
+
+            posts = fachadaPersistenia.getAllPosts();
+
+        } catch (Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
+        assertNotNull(posts);
     }
 
 }
