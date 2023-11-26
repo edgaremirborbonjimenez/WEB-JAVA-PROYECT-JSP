@@ -26,3 +26,4 @@ replay_pid*
 /src/Persistence/target/
 /src/Persistence/nbproject/
 /src/api/target/
+/src/Domain/target/
