@@ -42,8 +42,8 @@ public class Testing {
             usuer
                     = fachadaPersistenia.registrarUsuario(
                             new Usuario(
-                                    "Antonio",
-                                    "gmail.com",
+                                    "Ramon",
+                                    "oman@gmail.com",
                                     "1234",
                                     "1234556778",
                                     "Perro",
@@ -64,7 +64,7 @@ public class Testing {
         Post post = null;
         Usuario user = null;
         try {
-            user = fachadaPersistenia.consultarUsuario("antonio@gmail.com", "1234");
+            user = fachadaPersistenia.consultarUsuario("ramon@gmail.com", "1234");
             Comun comun = new Comun();
             comun.setUsuario(user);
             comun.setContenido("Los quiero como test");
@@ -121,7 +121,7 @@ public class Testing {
         Usuario usuario = null;
 
         try {
-            usuario = fachadaPersistenia.consultarUsuario("juanperez@gmail.com", "abcde12345");
+            usuario = fachadaPersistenia.consultarUsuario("ramon@gmail.com", "1234");
         } catch (Exception e) {
             System.out.println("!!Error: " + e.getMessage());
         }
@@ -143,7 +143,7 @@ public class Testing {
                     = fachadaPersistenia.registrarUsuario(
                             new Usuario(
                                     "Antonio",
-                                    "uis@gmail.com",
+                                    "ramon@gmail.com",
                                     "1234",
                                     "1234556778",
                                     "Perro",

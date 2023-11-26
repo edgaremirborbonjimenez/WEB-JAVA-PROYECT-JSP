@@ -10,7 +10,6 @@ import domain.Comun;
 import domain.Estado;
 import domain.Municipio;
 import domain.Normal;
-import domain.User;
 import domain.Usuario;
 import fachada.FachadaPersistencia;
 import java.util.Date;
@@ -26,7 +25,7 @@ public class Persistence {
     public static void main(String[] args) {
         try{
         Persistencia p = new FachadaPersistencia();
-        p.editarPost(1L, "Post Actualizado", "Acabo de actualizar mi ultimo post");
+        p.editarPost(1L, "Post Actualizado", "aksdfnalskjdnaslkdjna");
         }catch( Exception e){
             System.out.println(e.getMessage());
         }

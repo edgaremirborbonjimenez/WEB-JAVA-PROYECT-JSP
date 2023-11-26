@@ -18,7 +18,7 @@ import java.util.List;
 public interface Persistencia {
     Usuario registrarUsuario(Usuario usuario)throws Exception;
     Usuario consultarUsuario(String correo, String contrasenia)throws Exception;
-    Usuario consultarUsuarioByEmail(String correo);
+    Usuario consultarUsuarioByEmail(String correo)throws Exception;
     Post crearPost(Post post)throws Exception;
     Post eliminarPost(Long id)throws Exception;
     Post editarPost(Long id, String titulo, String contenido)throws Exception;

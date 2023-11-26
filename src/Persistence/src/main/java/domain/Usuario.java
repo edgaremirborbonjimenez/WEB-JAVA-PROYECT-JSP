@@ -48,17 +48,17 @@ public class Usuario implements Serializable {
     @Column(name = "telefono", nullable = false, length = 10)
     private String telefono;
 
-    @Column(name = "avatar", nullable = false, length = 10)
+    @Column(name = "avatar", nullable = false, length = 30)
     private String avatar;
 
-    @Column(name = "ciudad", nullable = false, length = 10)
+    @Column(name = "ciudad", nullable = false, length = 30)
     private String ciudad;
 
     @Column(name = "fechaNacimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
 
-    @Column(name = "genero", nullable = false, length = 10)
+    @Column(name = "genero", nullable = false, length = 30)
     private String genero;
 
     @ManyToOne(cascade = {CascadeType.REMOVE,CascadeType.PERSIST})
