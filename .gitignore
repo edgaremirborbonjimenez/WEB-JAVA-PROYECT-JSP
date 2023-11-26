@@ -25,3 +25,4 @@ replay_pid*
 /src/Persistencia/target/
 /src/Persistence/target/
 /src/Persistence/nbproject/
+/src/api/target/

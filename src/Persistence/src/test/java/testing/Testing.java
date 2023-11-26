@@ -33,9 +33,23 @@ public class Testing {
     public void registrarUsuarioTest() {
         Usuario usuer = null;
         try {
-            Municipio municipios = fachadaPersistenia.registrarMunicipio(new Municipio("Puebla", new Estado("Nacho")));
+            Municipio municipios = 
+                    fachadaPersistenia.registrarMunicipio(
+                                    new Municipio("Puebla",
+                                    new Estado("Nacho")));
 
-            usuer = fachadaPersistenia.registrarUsuario(new Usuario("Antonio", "antonio@gmail.com", "1234", "1234556778", "Perro", "Navojoa", new Date(), "Hombre", municipios));
+            usuer = 
+                    fachadaPersistenia.registrarUsuario(
+                            new Usuario(
+                                    "Antonio",
+                                    "antonio@gmail.com",
+                                    "1234",
+                                    "1234556778",
+                                    "Perro",
+                                    "Navojoa",
+                                    new Date(),
+                                    "Hombre",
+                                    municipios));
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -67,7 +81,10 @@ public class Testing {
         Comun post = null;
 
         try {
-            post = (Comun) fachadaPersistenia.editarPost(1L, "Post editado", "Edite el post");
+            post = (Comun) fachadaPersistenia.editarPost(
+                    9L,
+                    "Post editado",
+                    "Edite el post");
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -82,7 +99,7 @@ public class Testing {
         Comun post = null;
         try {
             user = (Normal) fachadaPersistenia.consultarUsuario("juanperez@gmail.com", "abcde12345");
-            post = (Comun) fachadaPersistenia.getPostById(8L);
+            post = (Comun) fachadaPersistenia.getPostById(9L);
             Comentario c = new Comentario();
             c.setNormal(user);
             c.setFechaHora(new Date());
