@@ -172,5 +172,39 @@ public class Testing {
         }
         assertNotNull(posts);
     }
+    
+    @Test
+    public void registrarEstado(){
+        Estado estado = null;
+        try {
+            estado = fachadaPersistenia.registrarEstado( new Estado("San Luis sinsin"));
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        
+        assertNotNull(estado);
+    }
+    
+    @Test
+    public void eliminarPublicacion(){
+        Post post = null;
+        try {
+            post = fachadaPersistenia.eliminarPost(2L);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        assertNull(post);
+    }
+    
+    @Test
+    public void eliminarComentario(){
+        Comentario comentario = null;
+        try {
+            comentario = fachadaPersistenia.eliminarComentario(1L);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        assertNull(comentario);
+    }
 
 }
