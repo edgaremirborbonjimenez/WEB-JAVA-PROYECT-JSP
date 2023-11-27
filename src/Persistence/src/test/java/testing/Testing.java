@@ -99,8 +99,8 @@ public class Testing {
         Normal user = null;
         Comun post = null;
         try {
-            user = (Normal) fachadaPersistenia.consultarUsuario("juanperez@gmail.com", "abcde12345");
-            post = (Comun) fachadaPersistenia.getPostById(9L);
+            user = (Normal) fachadaPersistenia.consultarUsuario("juanperez@gmail.com", "1234");
+            post = (Comun) fachadaPersistenia.getPostById(2L);
             Comentario c = new Comentario();
             c.setNormal(user);
             c.setFechaHora(new Date());
@@ -172,39 +172,64 @@ public class Testing {
         }
         assertNotNull(posts);
     }
-    
+
     @Test
-    public void registrarEstado(){
+    public void registrarEstado() {
         Estado estado = null;
         try {
-            estado = fachadaPersistenia.registrarEstado( new Estado("San Luis sinsin"));
+            estado = fachadaPersistenia.registrarEstado(new Estado("San Luis sinsin"));
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        
+
         assertNotNull(estado);
     }
-    
+
     @Test
-    public void eliminarPublicacion(){
+    public void eliminarPublicacion() {
         Post post = null;
         try {
-            post = fachadaPersistenia.eliminarPost(2L);
+            post = fachadaPersistenia.eliminarPost(4L);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        assertNull(post);
+        assertNotNull(post);
     }
-    
+
     @Test
-    public void eliminarComentario(){
+    public void eliminarComentario() {
         Comentario comentario = null;
         try {
             comentario = fachadaPersistenia.eliminarComentario(1L);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        assertNull(comentario);
+        assertNotNull(comentario);
+    }
+
+    @Test
+    public void registrarUsuarioNormalTest() {
+        Normal usuer = null;
+        try {
+            
+            Normal u = new Normal();
+            u.setNombreCompleto("Juan Perez");
+            u.setCorreo("juanperez@gmail.com");
+            u.setContraseña("1234");
+            u.setTelefono("123456789");
+            u.setAvatar("Perro");
+            u.setCiudad("Navojoa");
+            u.setFechaNacimiento(new Date());
+            u.setGenero("Masculino");
+            u.setMunicipio(new Municipio("Navojoa", new Estado("Sonora")));
+            
+            usuer = fachadaPersistenia.registrarUsuarioNormal(u);
+            System.out.println(usuer.getId());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        assertNotNull(usuer);
     }
 
 }

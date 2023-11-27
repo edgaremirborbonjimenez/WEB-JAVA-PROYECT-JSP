@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "admors")
 public class Admor extends Usuario implements Serializable {
 
-    @OneToMany(mappedBy = "admor", cascade = {CascadeType.REMOVE})
+    @OneToMany(mappedBy = "admor")
     private List<Anclado> anclado;
 
     public Admor() {

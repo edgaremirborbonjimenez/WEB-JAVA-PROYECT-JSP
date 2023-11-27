@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Table(name = "comuns")
 public class Comun extends Post implements Serializable {
 
-    @ManyToOne(cascade = {CascadeType.REMOVE})
+    @ManyToOne()
     @JoinColumn(name = "usuarioID", nullable = false)
     private Usuario usuario;
 

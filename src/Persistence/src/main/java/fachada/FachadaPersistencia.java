@@ -15,6 +15,7 @@ import dao.interfaces.UsuarioDAO;
 import domain.Comentario;
 import domain.Estado;
 import domain.Municipio;
+import domain.Normal;
 import domain.Post;
 import domain.Usuario;
 import java.util.List;
@@ -59,7 +60,7 @@ public class FachadaPersistencia implements Persistencia {
     }
 
     @Override
-    public Usuario consultarUsuarioByEmail(String correo)throws Exception{
+    public Usuario consultarUsuarioByEmail(String correo) throws Exception {
         try {
             return usuarioDAO.conusltarUsuarioByCorreo(correo);
         } catch (Exception e) {
@@ -153,6 +154,18 @@ public class FachadaPersistencia implements Persistencia {
 
         try {
             return postDAO.getAllPosts();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+
+    }
+
+    @Override
+    public Normal registrarUsuarioNormal(Normal usuario) throws Exception {
+
+        try {
+            return usuarioDAO.registrarUsuarioNormal(usuario);
+
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
