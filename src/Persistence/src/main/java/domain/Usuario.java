@@ -65,7 +65,7 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "municipioID", nullable = false)
     private Municipio municipio;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario",cascade = {CascadeType.REMOVE})
     private List<Comun> comun;
 
     public Usuario() {

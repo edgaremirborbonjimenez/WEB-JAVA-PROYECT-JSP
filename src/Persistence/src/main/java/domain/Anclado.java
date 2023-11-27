@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "anclados")
 public class Anclado extends Post implements Serializable {
 
-    @ManyToOne(cascade = {CascadeType.REMOVE})
+    @ManyToOne()
     @JoinColumn(name = "admorID", nullable = false)
     private Admor admor;
 

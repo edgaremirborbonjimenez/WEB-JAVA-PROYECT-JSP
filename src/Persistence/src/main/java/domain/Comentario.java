@@ -39,11 +39,11 @@ public class Comentario implements Serializable {
     @Column(name = "contenido")
     private String contenido;
 
-    @ManyToOne(cascade = {CascadeType.REMOVE})
+    @ManyToOne()
     @JoinColumn(name = "comunID", nullable = false)
     private Comun comun;
 
-    @ManyToOne(cascade = {CascadeType.REMOVE})
+    @ManyToOne()
     @JoinColumn(name = "normalID", nullable = false)
     private Normal normal;
 

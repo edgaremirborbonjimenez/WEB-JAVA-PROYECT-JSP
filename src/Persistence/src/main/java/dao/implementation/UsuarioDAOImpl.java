@@ -2,6 +2,7 @@ package dao.implementation;
 
 import dao.interfaces.UsuarioDAO;
 import db.DataBaseConnection;
+import domain.Normal;
 import domain.Usuario;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -24,10 +25,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public Usuario registrarUsuario(Usuario usuario) {
-        
+
         Usuario u = this.conusltarUsuarioByCorreo(usuario.getCorreo());
 
-        if (u!=null) {
+        if (u != null) {
             return null;
         }
         entityManager.getTransaction().begin();
@@ -70,6 +71,22 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         } catch (Exception e) {
             return usuario;
         }
+    }
+
+    @Override
+    public Normal registrarUsuarioNormal(Normal usuario) {
+        Usuario u = this.conusltarUsuarioByCorreo(usuario.getCorreo());
+
+        if (u != null) {
+            return null;
+        }
+        entityManager.getTransaction().begin();
+
+        entityManager.persist(usuario);
+
+        entityManager.getTransaction().commit();
+
+        return usuario;
     }
 
 }
