@@ -214,7 +214,7 @@ public class Testing {
     public void registrarUsuarioNormalTest() {
         Normal usuer = null;
         try {
-            
+
             Normal u = new Normal();
             u.setNombreCompleto("Juan Perez");
             u.setCorreo("juanperez@gmail.com");
@@ -225,7 +225,7 @@ public class Testing {
             u.setFechaNacimiento(new Date());
             u.setGenero("Masculino");
             u.setMunicipio(new Municipio("Navojoa", new Estado("Sonora")));
-            
+
             usuer = fachadaPersistenia.registrarUsuarioNormal(u);
             System.out.println(usuer.getId());
         } catch (Exception e) {
@@ -234,7 +234,7 @@ public class Testing {
 
         assertNotNull(usuer);
     }
-    
+
     @Test
     public void registrarMunicipio() {
         Municipio municipio = null;
@@ -246,11 +246,11 @@ public class Testing {
 
         assertNotNull(municipio);
     }
-    
+
     @Test
-    public Post getPostById() {
-       
-         Post post = null;
+    public void getPostById() {
+
+        Post post = null;
 
         try {
             post = fachadaPersistenia.getPostById(2L);
@@ -259,13 +259,11 @@ public class Testing {
         }
 
         assertNotNull(post);
-        
-        return post;
 
     }
-    
-      @Test
-    public Usuario consultarUsuarioByEmail() {
+
+    @Test
+    public void consultarUsuarioByEmail() {
 
         Usuario usuario = null;
 
@@ -276,59 +274,51 @@ public class Testing {
         }
 
         assertNotNull(usuario);
-        
-        return usuario;
 
     }
-    
+
     @Test
     public void testValidEmail() {
-        
-        try{
-        assertTrue(Utils.isEmailValid("usuario@dominio.com"));
-    } catch (Exception e) {
+
+        try {
+            assertTrue(Utils.isEmailValid("usuario@dominio.com"));
+        } catch (Exception e) {
             System.out.println("!!Error: " + e.getMessage());
+        }
+
     }
-        
-    }
-    
+
     @Test
     public void testValidName() {
-        
-        try{
-        assertTrue(Utils.isNameValid("Carlos"));
-    } catch (Exception e) {
+
+        try {
+            assertTrue(Utils.isNameValid("Carlos"));
+        } catch (Exception e) {
             System.out.println("!!Error: " + e.getMessage());
+        }
+
     }
-        
-    }
-    
+
     @Test
     public void testValidPhoneNumber() {
-        
-        try{
-        assertTrue(Utils.isPhonNumberValid("6541236547"));
-    } catch (Exception e) {
+
+        try {
+            assertTrue(Utils.isPhonNumberValid("6541236547"));
+        } catch (Exception e) {
             System.out.println("!!Error: " + e.getMessage());
+        }
+
     }
-        
-    }
-    
+
     @Test
     public void testValidPassword() {
-        
-        try{
-        assertTrue(Utils.isPasswordValid("Contrasenia1"));
-    } catch (Exception e) {
-            System.out.println("!!Error: " + e.getMessage());
-    }
-        
-    }
-    
-    
-    
-    
 
-    
+        try {
+            assertTrue(Utils.isPasswordValid("Contrasenia1"));
+        } catch (Exception e) {
+            System.out.println("!!Error: " + e.getMessage());
+        }
+
+    }
 
 }
