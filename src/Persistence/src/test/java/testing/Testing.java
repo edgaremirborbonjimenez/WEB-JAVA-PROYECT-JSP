@@ -15,12 +15,15 @@ import domain.Usuario;
 import fachada.FachadaPersistencia;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import utils.Utils;
 
 /**
  *
@@ -231,5 +234,101 @@ public class Testing {
 
         assertNotNull(usuer);
     }
+    
+    @Test
+    public void registrarMunicipio() {
+        Municipio municipio = null;
+        try {
+            municipio = fachadaPersistenia.registrarMunicipio(new Municipio("Cajeme", new Estado("Sonora")));
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        assertNotNull(municipio);
+    }
+    
+    @Test
+    public Post getPostById() {
+       
+         Post post = null;
+
+        try {
+            post = fachadaPersistenia.getPostById(2L);
+        } catch (Exception e) {
+            System.out.println("!!Error: " + e.getMessage());
+        }
+
+        assertNotNull(post);
+        
+        return post;
+
+    }
+    
+      @Test
+    public Usuario consultarUsuarioByEmail() {
+
+        Usuario usuario = null;
+
+        try {
+            usuario = fachadaPersistenia.consultarUsuarioByEmail("ramon@gmail.com");
+        } catch (Exception e) {
+            System.out.println("!!Error: " + e.getMessage());
+        }
+
+        assertNotNull(usuario);
+        
+        return usuario;
+
+    }
+    
+    @Test
+    public void testValidEmail() {
+        
+        try{
+        assertTrue(Utils.isEmailValid("usuario@dominio.com"));
+    } catch (Exception e) {
+            System.out.println("!!Error: " + e.getMessage());
+    }
+        
+    }
+    
+    @Test
+    public void testValidName() {
+        
+        try{
+        assertTrue(Utils.isNameValid("Carlos"));
+    } catch (Exception e) {
+            System.out.println("!!Error: " + e.getMessage());
+    }
+        
+    }
+    
+    @Test
+    public void testValidPhoneNumber() {
+        
+        try{
+        assertTrue(Utils.isPhonNumberValid("6541236547"));
+    } catch (Exception e) {
+            System.out.println("!!Error: " + e.getMessage());
+    }
+        
+    }
+    
+    @Test
+    public void testValidPassword() {
+        
+        try{
+        assertTrue(Utils.isPasswordValid("Contrasenia1"));
+    } catch (Exception e) {
+            System.out.println("!!Error: " + e.getMessage());
+    }
+        
+    }
+    
+    
+    
+    
+
+    
 
 }
