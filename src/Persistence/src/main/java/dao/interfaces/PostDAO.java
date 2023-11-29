@@ -1,6 +1,7 @@
 
 package dao.interfaces;
 
+import domain.Anclado;
 import domain.Post;
 import java.util.List;
 
@@ -8,6 +9,8 @@ import java.util.List;
 public interface PostDAO {
     
     public Post crearPost(Post post);
+    
+    public Anclado crearPostAnclado(Anclado anclado);
     
     public Post eliminarPost(Long id);
     

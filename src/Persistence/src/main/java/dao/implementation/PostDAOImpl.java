@@ -2,6 +2,7 @@ package dao.implementation;
 
 import dao.interfaces.PostDAO;
 import db.DataBaseConnection;
+import domain.Anclado;
 import domain.Post;
 import java.util.Date;
 import java.util.List;
@@ -97,6 +98,19 @@ public class PostDAOImpl implements PostDAO {
         } catch (Exception e) {
             return null;
         }
+
+    }
+
+    @Override
+    public Anclado crearPostAnclado(Anclado anclado) {
+
+        entityManager.getTransaction().begin();
+
+        entityManager.persist(anclado);
+
+        entityManager.getTransaction().commit();
+
+        return anclado;
 
     }
 

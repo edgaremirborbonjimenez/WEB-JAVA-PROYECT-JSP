@@ -1,11 +1,14 @@
 package dao.interfaces;
 
+import domain.Admor;
 import domain.Normal;
 import domain.Usuario;
 
 public interface UsuarioDAO {
 
     public Usuario registrarUsuario(Usuario usuario);
+
+    public Admor registrarUsuarioAdmin(Admor admin);
 
     public Normal registrarUsuarioNormal(Normal usuario);
 
