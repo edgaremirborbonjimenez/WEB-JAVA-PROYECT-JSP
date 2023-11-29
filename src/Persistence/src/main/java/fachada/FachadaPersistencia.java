@@ -12,6 +12,7 @@ import dao.interfaces.MunicipioDAO;
 import dao.interfaces.Persistencia;
 import dao.interfaces.PostDAO;
 import dao.interfaces.UsuarioDAO;
+import domain.Admor;
 import domain.Comentario;
 import domain.Estado;
 import domain.Municipio;
@@ -170,6 +171,11 @@ public class FachadaPersistencia implements Persistencia {
             throw new Exception(e.getMessage());
         }
 
+    }
+
+    @Override
+    public Normal registrarUsuarioAdmin(Admor admor) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

@@ -4,6 +4,7 @@
  */
 package dao.interfaces;
 
+import domain.Admor;
 import domain.Comentario;
 import domain.Estado;
 import domain.Municipio;
@@ -19,6 +20,8 @@ import java.util.List;
 public interface Persistencia {
 
     Usuario registrarUsuario(Usuario usuario) throws Exception;
+
+    Normal registrarUsuarioAdmin(Admor admor) throws Exception;
 
     Normal registrarUsuarioNormal(Normal usuario) throws Exception;
 

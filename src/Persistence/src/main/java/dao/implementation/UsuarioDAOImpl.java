@@ -2,6 +2,7 @@ package dao.implementation;
 
 import dao.interfaces.UsuarioDAO;
 import db.DataBaseConnection;
+import domain.Admor;
 import domain.Normal;
 import domain.Usuario;
 import javax.persistence.EntityManager;
@@ -87,6 +88,24 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         entityManager.getTransaction().commit();
 
         return usuario;
+    }
+
+    @Override
+    public Admor registrarUsuarioAdmin(Admor admin) {
+
+        Usuario u = this.conusltarUsuarioByCorreo(admin.getCorreo());
+
+        if (u != null) {
+            return null;
+        }
+        entityManager.getTransaction().begin();
+
+        entityManager.persist(admin);
+
+        entityManager.getTransaction().commit();
+
+        return admin;
+
     }
 
 }
