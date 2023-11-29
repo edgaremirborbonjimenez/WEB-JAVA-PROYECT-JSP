@@ -7,6 +7,7 @@ package serverlets;
 import dao.interfaces.Persistencia;
 import domain.Estado;
 import domain.Municipio;
+import domain.Normal;
 import domain.Usuario;
 import fachada.FachadaPersistencia;
 import java.io.IOException;
@@ -17,6 +18,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Date;
+import utils.Utils;
 
 /**
  *
@@ -89,12 +91,25 @@ public class Sigin extends HttpServlet {
         String municipio = request.getParameter("municipio");
         String estado = request.getParameter("estado");
         String password = request.getParameter("password");
+        
+        if (!Utils.isPasswordValid(password)) {
+            processErrorRequest(response, "Contraseña invalida, al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número");
+        }
+        if (!Utils.isEmailValid(email)) {
+            processErrorRequest(response, "Correo Electronico Invalido");
+        }
+        if (!Utils.isNameValid(name)) {
+            processErrorRequest(response, "Nombre invalido");
+        }
+        if (!Utils.isPhonNumberValid(phone)) {
+            processErrorRequest(response, "Numero de telefono invalido");
+        }
 
         try {
             Persistencia p = new FachadaPersistencia();
             Usuario u = p.consultarUsuarioByEmail(email);
             if (u == null) {
-                Usuario newUser = new Usuario();
+                Normal newUser = new Normal();
                 newUser.setNombreCompleto(name);
                 newUser.setAvatar(fotoPerfil);
                 newUser.setContraseña(password);
@@ -104,14 +119,14 @@ public class Sigin extends HttpServlet {
                 newUser.setCiudad(city);
                 newUser.setTelefono(phone);
                 newUser.setMunicipio(new Municipio(municipio, new Estado(estado)));
-                newUser = p.registrarUsuario(newUser);
+                newUser = p.registrarUsuarioNormal(newUser);
                 if (newUser.getId() != null) {
                     response.sendRedirect("/api/login.jsp");
                 }
             }
             response.sendRedirect("/api/sigin.jsp");
         } catch (Exception e) {
-            processErrorRequest(response, e.getMessage());
+            processErrorRequest(response, "SURGIO UN ERROR: "+e.getMessage());
         }
     }
 

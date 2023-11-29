@@ -23,7 +23,7 @@
                 <div class="txtIS">Crear Sesión</div>
                 <div class="txt">Nombre Completo:</div>
                 <div class="inputDiv"><input name="name" class="input" type="text"></div>
-                <div class="txt">Foto de Perfil:</div>
+                <div class="txt">Foto de Perfil(ingresa url):</div>
                 <div class="inputDiv"><input name="fotoPerfil" class="input" type="text"></div>
                 <div class="txt">Fecha de nacimiento:</div>
                 <div class="inputDiv"><input name="birthday" class="input" type="date"></div>

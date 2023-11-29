@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import utils.Utils;
 
 /**
  *
@@ -78,6 +79,12 @@ public class Login extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        if (!Utils.isPasswordValid(password)) {
+            processErrorRequest(response, "Contraseña invalida, al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número");
+        }
+        if (!Utils.isEmailValid(email)) {
+            processErrorRequest(response, "Correo Electronico Invalido");
+        }
         try {
 
             Persistencia p = new FachadaPersistencia();
@@ -85,8 +92,9 @@ public class Login extends HttpServlet {
             if (u != null) {
                 request.setAttribute("email", email);
                 request.setAttribute("password", password);
-                getServletContext().getRequestDispatcher("/sigin.jsp")
-                        .forward(request, response);
+                /*getServletContext().getRequestDispatcher("/sigin.jsp")
+                        .forward(request, response);*/
+                processErrorRequest(response, "Se inicio sesion con exito!!");
             }
         } catch (Exception e) {
             processErrorRequest(response, e.getMessage());

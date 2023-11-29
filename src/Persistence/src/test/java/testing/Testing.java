@@ -217,7 +217,7 @@ public class Testing {
 
             Normal u = new Normal();
             u.setNombreCompleto("Juan Perez");
-            u.setCorreo("juanperez@gmail.com");
+            u.setCorreo("juanrez@gmail.com");
             u.setContraseña("1234");
             u.setTelefono("123456789");
             u.setAvatar("Perro");
