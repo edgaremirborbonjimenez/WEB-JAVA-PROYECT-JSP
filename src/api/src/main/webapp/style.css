@@ -71,3 +71,34 @@ header{
 button:hover{
     background-color: aliceblue;
 }
+.con {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FDFF8C;
+    font-family: sans-serif;    
+    border: 2px solid black ;
+    margin: auto;
+    padding: 10%;
+    font-family: sans-serif;    
+    min-width: 200px;
+    max-width: 400px;
+    border-radius: 5px;
+}
+
+.ele {
+    padding: 2%; 
+    margin: 10px;
+    text-align: center;
+}
+a:visited{
+    color: black;
+}
+a{
+    text-decoration: none;
+}
+.cen {
+    margin: 30px;
+    display: grid;
+    place-items: center;
+}
