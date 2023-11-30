@@ -8,9 +8,25 @@
         <servlet-name>Login</servlet-name>
         <servlet-class>serverlets.Login</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Inicio</servlet-name>
+        <servlet-class>serverlets.Inicio</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Sigin</servlet-name>
+        <servlet-class>serverlets.Sigin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Inicio</servlet-name>
+        <url-pattern>/Inicio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Sigin</servlet-name>
+        <url-pattern>/Sigin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
