@@ -6,7 +6,11 @@ var xmlhttp =  new XMLHttpRequest();
 xmlhttp.open("GET","Inicio",true);
 xmlhttp.onreadystatechange = function (){
     if(xmlhttp.readyState === 4 && xmlhttp.status === 200){
-        document.getElementById("texto").innerHTML = xmlhttp.responseText;
+        var j = (JSON.parse(xmlhttp.responseText));
+        alert(j[1]);
+        document.getElementById("autor").innerHTML = j;
+        document.getElementById("texto").innerHTML = j;
+        
       }
 };
 xmlhttp.send();

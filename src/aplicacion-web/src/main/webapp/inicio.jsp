@@ -23,7 +23,7 @@
                             <h3 id="autor">De: Roberto</h3>
 				<img class="basura" src="https://cdn3.iconfinder.com/data/icons/user-interface-169/32/trash-512.png">
 			</div>
-                    <h5 id="titulo">mi primera publicacion</h5>
+                    <h5 id="titulo"></h5>
                         <p id="texto"></p>
 			<p>comentarios</p>
 			<div class="coms">
