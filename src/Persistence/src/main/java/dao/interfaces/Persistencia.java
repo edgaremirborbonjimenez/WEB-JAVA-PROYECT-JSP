@@ -21,7 +21,7 @@ public interface Persistencia {
 
     Usuario registrarUsuario(Usuario usuario) throws Exception;
 
-    Normal registrarUsuarioAdmin(Admor admor) throws Exception;
+    Admor registrarUsuarioAdmin(Admor admor) throws Exception;
 
     Normal registrarUsuarioNormal(Normal usuario) throws Exception;
 

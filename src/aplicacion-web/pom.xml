@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.mycompany</groupId>
-    <artifactId>api</artifactId>
+    <artifactId>aplicacion-web</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>api-1.0-SNAPSHOT</name>
+    <name>aplicacion-web-1.0-SNAPSHOT</name>
     
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -25,17 +25,12 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Domain</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>Persistence</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
     
-   <build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

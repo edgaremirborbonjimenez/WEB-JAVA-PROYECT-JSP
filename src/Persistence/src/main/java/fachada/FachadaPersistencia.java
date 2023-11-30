@@ -174,8 +174,13 @@ public class FachadaPersistencia implements Persistencia {
     }
 
     @Override
-    public Normal registrarUsuarioAdmin(Admor admor) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Admor registrarUsuarioAdmin(Admor admor) throws Exception {
+        try {
+            return usuarioDAO.registrarUsuarioAdmin(admor);
+
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
 }
