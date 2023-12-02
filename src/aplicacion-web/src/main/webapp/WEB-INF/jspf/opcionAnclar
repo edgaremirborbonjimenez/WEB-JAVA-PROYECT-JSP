@@ -1,0 +1,6 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<div class="main__section_form-publicar-anclar">
+    <input type="checkbox" name="anclar" id="anclar">
+    <label for="anclar">Anclar</label>
+</div>

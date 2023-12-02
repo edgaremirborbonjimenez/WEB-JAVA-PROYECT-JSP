@@ -10,7 +10,7 @@ if(psw.type == "password"){
 }
 
 function muestraMensaje(){
-alert("Iniciaste seison");
+alert("Iniciaste sesion");
 }
 
 function goHome(){
