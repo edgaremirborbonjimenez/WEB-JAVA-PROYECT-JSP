@@ -91,9 +91,9 @@ public class Login extends HttpServlet {
             if (u != null) {
                 request.setAttribute("email", email);
                 request.setAttribute("password", password);
-                /*getServletContext().getRequestDispatcher("/sigin.jsp")
-                        .forward(request, response);*/
-                processErrorRequest(response, "Se inicio sesion con exito!!");
+                getServletContext().getRequestDispatcher("/inicio.jsp")
+                        .forward(request, response);
+                //processErrorRequest(response, "Se inicio sesion con exito!!");
             }
         } catch (Exception e) {
             processErrorRequest(response, e.getMessage());

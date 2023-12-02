@@ -42,7 +42,7 @@ public class Inicio extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Inicio</title>");            
+            out.println("<title>Servlet Inicio</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Inicio at " + request.getContextPath() + "</h1>");
@@ -64,14 +64,17 @@ public class Inicio extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+
         Persistencia p = new FachadaPersistencia();
         var post = new Post(new Date(), new Date(), "Publicacion de prueba", "en esta publicacion solo sera texto xd");
         var post2 = new Post(new Date(), new Date(), "Publicacion de numero 2", "ojala tubiera ideas de mas publicaciones para que sea mas largo");
         var post3 = new Post(new Date(), new Date(), "Publicacion de prueba 3", "soy relleno para hacer mas publicaciones jje");
         try {
+            /*
             p.crearPost(post);
             p.crearPost(post2);
             p.crearPost(post2);
+             */
         } catch (Exception ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
