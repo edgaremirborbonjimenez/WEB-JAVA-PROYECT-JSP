@@ -71,3 +71,22 @@ header{
 button:hover{
     background-color: aliceblue;
 }
+.cen{
+    display: grid;
+    place-items: center;
+}
+.con{
+    padding: 10px;
+    margin: 10px;
+    background-color: #FDFF8C;
+    display: inline-flex;
+}
+.ele{
+    padding: 10px;
+    margin: 10px;
+    
+}
+a{
+    text-decoration: none;
+    color: black;
+}

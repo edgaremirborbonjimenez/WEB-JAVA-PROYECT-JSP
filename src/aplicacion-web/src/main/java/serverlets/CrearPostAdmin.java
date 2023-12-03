@@ -18,6 +18,11 @@ import jakarta.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import dao.interfaces.Persistencia;
 import domain.Anclado;
+import domain.Comun;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.apache.commons.io.IOUtils;
 
 /**
@@ -66,9 +71,8 @@ public class CrearPostAdmin extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-//        processRequest(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        
     }
 
     /**
@@ -80,14 +84,45 @@ public class CrearPostAdmin extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-       String action = request.getParameter("action");
-       
-       if (action != null && action.equalsIgnoreCase("crear-post-anclado")) {
-            this.crearPublicacionAnclado(request, response);
-            return;
-        }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        
+        var correo = request.getParameter("correo");
+        var pass = request.getParameter("pass");
+        
+        var fachadaPersistenia = new FachadaPersistencia();
+        Comun comun = new Comun();
+        try {
+            var user = fachadaPersistenia.consultarUsuario(correo, pass);
+            
+            comun.setUsuario(user);
+            comun.setContenido(request.getParameter("contenido"));
+            comun.setFechaHoraCreacon(new Date());
+            comun.setTitulo(request.getParameter("titulo"));
+            
+        } catch (Exception ex) {          }
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+        if(comun.getId()!=null)
+            response.getWriter().write("Publicacion Creada");
+        else
+            response.getWriter().write("Hubo un problema al crear la publicacion");
+        System.out.println(comun.getId());
+        System.out.println(comun.getTitulo());
+        System.out.println(comun.getContenido());
+        System.out.println(comun.getUsuario().getCorreo());
+        System.out.println(comun.getFechaHoraCreacon());
+        
+        response.sendRedirect("Inicio.jsp");
+        
+//        if (request.getParameter("correo") != null && request.getParameter("pass") != null)
+//            response.getWriter().write("Parámetros recibidos correctamente: correo=" + request.getParameter("correo") + ", id=" + request.getParameter("pass"));
+//        else 
+//            response.getWriter().write("Error: Faltan parámetros en la solicitud.");
+//       if (action != null && action.equalsIgnoreCase("crear-post-anclado")) {
+//            this.crearPublicacionAnclado(request, response);
+//            return;
+//        }
+        
     }
 
     /**
