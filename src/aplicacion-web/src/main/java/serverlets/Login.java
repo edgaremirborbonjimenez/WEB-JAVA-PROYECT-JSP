@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import utils.Utils;
 
 /**
@@ -75,6 +76,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -89,11 +91,9 @@ public class Login extends HttpServlet {
             Persistencia p = new FachadaPersistencia();
             Usuario u = p.consultarUsuario(email, password);
             if (u != null) {
-                request.setAttribute("email", email);
-                request.setAttribute("password", password);
-                getServletContext().getRequestDispatcher("/inicio.jsp")
-                        .forward(request, response);
-                //processErrorRequest(response, "Se inicio sesion con exito!!");
+                
+                session.setAttribute("usuario", u);
+                response.sendRedirect("inicio.jsp");
             }
         } catch (Exception e) {
             processErrorRequest(response, e.getMessage());

@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import dao.interfaces.Persistencia;
 import domain.Anclado;
 import domain.Comun;
+import domain.Usuario;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -85,7 +86,16 @@ public class CrearPostAdmin extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
         
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        if (usuario!=null) {
+            System.out.println(usuario.getId());
+            System.out.println(usuario.getNombreCompleto());
+        }
+        
+        /*
         var correo = request.getParameter("correo");
         var pass = request.getParameter("pass");
         
@@ -113,7 +123,7 @@ public class CrearPostAdmin extends HttpServlet {
         System.out.println(comun.getFechaHoraCreacon());
         
         response.sendRedirect("Inicio.jsp");
-        
+        */
 //        if (request.getParameter("correo") != null && request.getParameter("pass") != null)
 //            response.getWriter().write("Parámetros recibidos correctamente: correo=" + request.getParameter("correo") + ", id=" + request.getParameter("pass"));
 //        else 

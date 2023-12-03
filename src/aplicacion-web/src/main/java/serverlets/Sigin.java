@@ -96,16 +96,16 @@ public class Sigin extends HttpServlet {
 
         if (!Utils.isPasswordValid(password)) {
             processErrorRequest(response, "Contraseña invalida, al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número");
-        }
+        }else
         if (!Utils.isEmailValid(email)) {
             processErrorRequest(response, "Correo Electronico Invalido");
-        }
+        }else
         if (!Utils.isNameValid(name)) {
             processErrorRequest(response, "Nombre invalido");
-        }
+        }else
         if (!Utils.isPhonNumberValid(phone)) {
             processErrorRequest(response, "Numero de telefono invalido");
-        }
+        }else{
 
         try {
             Persistencia p = new FachadaPersistencia();
@@ -144,6 +144,7 @@ public class Sigin extends HttpServlet {
             response.sendRedirect("/aplicacion-web/sigin.jsp");
         } catch (Exception e) {
             processErrorRequest(response, "SURGIO UN ERROR: " + e.getMessage());
+        }
         }
     }
 
