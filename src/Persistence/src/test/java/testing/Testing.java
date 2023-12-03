@@ -5,6 +5,7 @@ package testing;
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
 import dao.interfaces.Persistencia;
+import domain.Anclado;
 import domain.Comentario;
 import domain.Comun;
 import domain.Estado;
@@ -31,7 +32,8 @@ import utils.Utils;
  */
 public class Testing {
 //
-//    Persistencia fachadaPersistenia = new FachadaPersistencia();
+
+    Persistencia fachadaPersistenia = new FachadaPersistencia();
 //
 //    @Test
 //    public void registrarUsuarioTest() {
@@ -175,6 +177,35 @@ public class Testing {
 //        }
 //        assertNotNull(posts);
 //    }
+
+    @Test
+    public void getAllAncladoPostsTest() {
+
+        List<Anclado> posts = null;
+        try {
+
+            posts = fachadaPersistenia.getAllAncladoPosts();
+
+        } catch (Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
+        assertNotNull(posts);
+    }
+
+    @Test
+    public void getAllComunPostsTest() {
+
+        List<Comun> posts = null;
+        try {
+
+            posts = fachadaPersistenia.getAllComunPosts();
+
+        } catch (Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }        
+        assertNotNull(posts);
+    }
+
 //
 //    @Test
 //    public void registrarEstado() {
@@ -320,5 +351,4 @@ public class Testing {
 //        }
 //
 //    }
-
 }

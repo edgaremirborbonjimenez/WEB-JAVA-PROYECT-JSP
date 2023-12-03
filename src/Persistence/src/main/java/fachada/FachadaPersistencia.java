@@ -13,7 +13,9 @@ import dao.interfaces.Persistencia;
 import dao.interfaces.PostDAO;
 import dao.interfaces.UsuarioDAO;
 import domain.Admor;
+import domain.Anclado;
 import domain.Comentario;
+import domain.Comun;
 import domain.Estado;
 import domain.Municipio;
 import domain.Normal;
@@ -70,9 +72,9 @@ public class FachadaPersistencia implements Persistencia {
     }
 
     @Override
-    public Post crearPost(Post post) throws Exception {
+    public Comun crearPostComun(Comun post) throws Exception {
         try {
-            return postDAO.crearPost(post);
+            return postDAO.crearPostComun(post);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
 
@@ -178,6 +180,34 @@ public class FachadaPersistencia implements Persistencia {
         try {
             return usuarioDAO.registrarUsuarioAdmin(admor);
 
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Anclado> getAllAncladoPosts() throws Exception {
+        try {
+            return postDAO.getAllAncladoPosts();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Comun> getAllComunPosts() throws Exception {
+        try {
+            return postDAO.getAllComunPosts();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public Anclado crearPostAnclado(Anclado post) throws Exception {
+        try {
+
+            return postDAO.crearPostAnclado(post);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

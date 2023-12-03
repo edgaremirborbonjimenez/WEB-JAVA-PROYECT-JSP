@@ -3,6 +3,7 @@ package dao.implementation;
 import dao.interfaces.PostDAO;
 import db.DataBaseConnection;
 import domain.Anclado;
+import domain.Comun;
 import domain.Post;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +28,7 @@ public class PostDAOImpl implements PostDAO {
     }
 
     @Override
-    public Post crearPost(Post post) {
+    public Comun crearPostComun(Comun post) {
 
         entityManager.getTransaction().begin();
 
@@ -113,5 +114,29 @@ public class PostDAOImpl implements PostDAO {
         return anclado;
 
     }
+
+    @Override
+    public List<Anclado> getAllAncladoPosts() {
+        try {
+            String query = "SELECT p FROM Anclado p";
+            TypedQuery<Anclado> consulta = entityManager.createQuery(query, Anclado.class);
+
+            List<Anclado> posts = consulta.getResultList();
+            return posts;
+        } catch (Exception e) {
+            return null;
+        }    }
+
+    @Override
+    public List<Comun> getAllComunPosts() {
+        try {
+            String query = "SELECT p FROM Comun p";
+            TypedQuery<Comun> consulta = entityManager.createQuery(query, Comun.class);
+
+            List<Comun> posts = consulta.getResultList();
+            return posts;
+        } catch (Exception e) {
+            return null;
+        }    }
 
 }

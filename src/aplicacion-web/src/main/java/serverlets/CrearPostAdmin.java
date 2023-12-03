@@ -160,7 +160,7 @@ public class CrearPostAdmin extends HttpServlet {
 
         try {
 
-            fachadaPersistencia.crearPost(postAnclado);
+            fachadaPersistencia.crearPostAnclado(postAnclado);
 
         } catch (Exception e) {
 

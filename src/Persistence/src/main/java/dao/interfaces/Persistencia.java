@@ -5,7 +5,9 @@
 package dao.interfaces;
 
 import domain.Admor;
+import domain.Anclado;
 import domain.Comentario;
+import domain.Comun;
 import domain.Estado;
 import domain.Municipio;
 import domain.Normal;
@@ -29,7 +31,9 @@ public interface Persistencia {
 
     Usuario consultarUsuarioByEmail(String correo) throws Exception;
 
-    Post crearPost(Post post) throws Exception;
+    Comun crearPostComun(Comun post) throws Exception;
+    
+    Anclado crearPostAnclado(Anclado post) throws Exception;
 
     Post eliminarPost(Long id) throws Exception;
 
@@ -46,4 +50,9 @@ public interface Persistencia {
     Comentario eliminarComentario(Long id) throws Exception;
 
     List<Post> getAllPosts() throws Exception;
+
+    List<Anclado> getAllAncladoPosts() throws Exception;
+
+    List<Comun> getAllComunPosts() throws Exception;
+
 }

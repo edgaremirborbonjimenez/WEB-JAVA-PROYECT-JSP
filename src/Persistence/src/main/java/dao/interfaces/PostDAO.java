@@ -2,13 +2,14 @@
 package dao.interfaces;
 
 import domain.Anclado;
+import domain.Comun;
 import domain.Post;
 import java.util.List;
 
 
 public interface PostDAO {
     
-    public Post crearPost(Post post);
+    public Comun crearPostComun(Comun post);
     
     public Anclado crearPostAnclado(Anclado anclado);
     
@@ -19,4 +20,8 @@ public interface PostDAO {
     public Post getPostById(Long id);
     
     public List<Post> getAllPosts();
+    
+    public List<Anclado> getAllAncladoPosts();
+    
+    public List<Comun> getAllComunPosts();
 }
