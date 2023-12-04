@@ -4,7 +4,10 @@
  */
 package serverlets;
 
+import com.google.gson.Gson;
 import dao.interfaces.Persistencia;
+import domain.Anclado;
+import domain.Comun;
 import domain.Post;
 import fachada.FachadaPersistencia;
 import jakarta.servlet.ServletException;
@@ -14,9 +17,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -61,12 +63,10 @@ public class Inicio extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        //processRequest(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 
         Persistencia p = new FachadaPersistencia();
-        var post = new Post(new Date(), new Date(), "Publicacion de prueba", "en esta publicacion solo sera texto xd");
+        /*var post = new Post(new Date(), new Date(), "Publicacion de prueba", "en esta publicacion solo sera texto xd");
         var post2 = new Post(new Date(), new Date(), "Publicacion de numero 2", "ojala tubiera ideas de mas publicaciones para que sea mas largo");
         var post3 = new Post(new Date(), new Date(), "Publicacion de prueba 3", "soy relleno para hacer mas publicaciones jje");
         try {
@@ -74,13 +74,45 @@ public class Inicio extends HttpServlet {
             p.crearPost(post);
             p.crearPost(post2);
             p.crearPost(post2);
-             */
+             
         } catch (Exception ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("mis frijolesss!!");
+        response.getWriter().write("mis frijolesss!!");*/
+        String jc = null;
+        String ja = null;
+        var postsComun=new HashMap<String, HashMap>();
+        try {
+            
+//          jc =new Gson().toJson((Comun)p.getAllAncladoPosts());
+//          ja =new Gson().toJson((Anclado)p.getAllAncladoPosts());
+            var i = 0;
+            for (var s :p.getAllComunPosts()){
+                var t = new HashMap<String, String>(); 
+                t.put("id", s.getId()+"");
+                t.put("nombre", s.getUsuario().getNombreCompleto());
+                t.put("titulo", s.getTitulo());
+                t.put("conteindo", s.getContenido());
+
+                postsComun.put(""+i, t);
+                i++;
+            }
+                
+             System.out.println(postsComun);
+             System.out.println("json : "+new Gson().toJson(postsComun));
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().print(new Gson().toJson(postsComun));
+
+        response.getWriter().flush();
+             
+        } catch (Exception ex) {System.out.println("algo malo paso"); 
+        ex.printStackTrace();
+        }
+        
+        
     }
 
     /**
