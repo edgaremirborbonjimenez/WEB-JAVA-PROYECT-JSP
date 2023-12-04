@@ -28,9 +28,7 @@
                         <div class="main__section-form-publicar">
                             <button class="main__section-form-publicar-confirmar" id="btn-guardar-post" type="submit">Publicar</button>
                             <div class="main__section-form-publicar-cancelar" id="btn-cancelar-post"><a href="inicio.jsp">Cancelar</a></div>
-                        </div>
-                                
-                                
+                        </div>    
                     </form>
                 </div>
             </section>
