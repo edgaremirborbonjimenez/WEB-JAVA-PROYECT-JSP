@@ -82,6 +82,7 @@ button:hover{
     display: inline-flex;
 }
 .ele{
+    font-family: sans-serif;
     padding: 10px;
     margin: 10px;
     

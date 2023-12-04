@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
@@ -18,27 +18,12 @@
         <main>
             <h2>${requestScope.email}</h2>
             <h2>${requestScope.password}</h2>
-		<button class="p">¡Vamos pública algo, haz clic aqui!</button>
 
-		<form action="">
-			<div class="f">
-                            <h3 id="autor">De: Roberto</h3>
-				<img class="basura" src="https://cdn3.iconfinder.com/data/icons/user-interface-169/32/trash-512.png">
-			</div>
-                    <h5 id="titulo"></h5>
-                        <p id="texto"></p>
-			<p>comentarios</p>
-			<div class="coms">
-				<p>Luis:</p>
-				<p>Marco:</p>
-				<p>Pedro:</p>
-				<p>Luisa:</p>
-			</div>
-			<div class="in">
-				<input type="text" id="comentario" placeholder="Escribele un comentario:">
-				<button type="button">Envíar</button>
-			</div>
-		</form>
+		<button class="p">¡Vamos pública algo, haz clic aqui!</button>
+                
+                <div id="publicaciones"></div>
+
+                    
 	</main>
                         <script src="inicio.js"></script>
     </body>
