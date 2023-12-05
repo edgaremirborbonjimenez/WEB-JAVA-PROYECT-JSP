@@ -10,6 +10,7 @@ import dao.interfaces.Persistencia;
 import domain.Anclado;
 import domain.Comentario;
 import domain.Comun;
+import domain.Normal;
 import domain.Post;
 import domain.Usuario;
 import fachada.FachadaPersistencia;
@@ -70,6 +71,7 @@ public class Inicio extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        
 //        Persistencia p = new FachadaPersistencia();
             
 //        try {
@@ -79,7 +81,6 @@ public class Inicio extends HttpServlet {
 //            var post = new Comun(user,comns, new Date(),new Date(), "Publicacion de prueba", "en esta publicacion solo sera texto xd");
 //            var post2 = new Comun(user,comns,new Date(), new Date(), "Publicacion de numero 2", "ojala tubiera ideas de mas publicaciones para que sea mas largo");
 //            var post3 = new Comun(user,comns,new Date(), new Date(), "Publicacion de prueba 3", "soy relleno para hacer mas publicaciones jje");
-//        
 //            
 //            p.crearPostComun(post);
 //            p.crearPostComun(post2);
@@ -95,10 +96,11 @@ public class Inicio extends HttpServlet {
 //            
 //        } catch (Exception ex) {
 //            
-//        }
-        
+//        }        
+        if(request.getSession().getAttribute("usuarioNormal")==null)        
+            System.out.println("usuario nullo ");
         enviarRespuestaJson(request, response);
-        
+
     }
 
     /**
@@ -110,7 +112,7 @@ public class Inicio extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         //processRequest(request, response);
         
         Persistencia p = new FachadaPersistencia();
@@ -118,40 +120,75 @@ public class Inicio extends HttpServlet {
         BufferedReader reader = request.getReader();
         StringBuilder stringBuilder = new StringBuilder();
         String line;
-        while ((line = reader.readLine()) != null) {
+        while ((line = reader.readLine()) != null) 
             stringBuilder.append(line);
-        }
-
+        
         // Convertir el cuerpo de la solicitud a un objeto JSON
         Gson gson = new Gson();
         JsonObject jsonBody = gson.fromJson(stringBuilder.toString(), JsonObject.class);
-
-        // Obtener el valor del campo "id"
-        String id = jsonBody.get("id").getAsString();
-        String borrar = jsonBody.get("borrar").getAsString();
-        
-        System.out.println(" id: "+id);
-        System.out.println(" borrar: "+borrar);
         
         
-        if(borrar.equalsIgnoreCase("post"))
+        //se comenta post
+        if(jsonBody.get("comentario")!=null)
             try {
-                System.out.println("Se borrara : "+p.getPostById(Long.parseLong(id)).getTitulo());
-                p.eliminarPost(Long.parseLong(id));
-                if(p.getPostById(Long.parseLong(id)).getTitulo()==null)
+                var id = jsonBody.get("id").getAsString();
+                var post = p.getPostComunById(Long.valueOf(id));
+                System.out.println("Comentara en : "+post.getTitulo());
+                var c = new Comentario();
+                c.setFechaHora(new Date());
+                c.setContenido(jsonBody.get("comentario").getAsString());
+                c.setComun(post);
+                c.setNormal((Normal)request.getSession().getAttribute("usuarioNormal"));
+                p.crearComentario(c);
+                
+                System.out.println("En la publicacion "+post.getId()+" se comento: ");
+                p.getPostComunById(Long.valueOf(id)).getComentarios().forEach(s -> System.out.println(s.getContenido()));
+                } catch (Exception ex) {           
+            }
+        
+        
+        if(jsonBody.get("borrar")!=null)
+            //se borra post
+            if(jsonBody.get("borrar").getAsString().compareToIgnoreCase("post")==0)
+            try {
+                var id = jsonBody.get("id").getAsString();
+                System.out.println("Se borrara : "+p.getPostComunById(Long.valueOf(id)).getTitulo());
+                p.eliminarPost(Long.valueOf(id));
+                if(p.getPostComunById(Long.valueOf(id)).getTitulo()==null)
                     System.out.println("publicacion borrada");
             } catch (Exception ex) {           }
         
-        enviarRespuestaJson(request, response);
+        if(jsonBody.get("idPost")!=null)
+            try{
+                var comentarios=new HashMap<String, HashMap>();
+                var i = 0;
+                for (var coms : p.getPostComunById(jsonBody.get("idPost").getAsLong()).getComentarios()) {
+                    var t = new HashMap<String, String>(); 
+                    t.put("id", coms.getId()+"");
+                    t.put("contenido", coms.getContenido());
+                    t.put("postId", coms.getComun().getId()+"");
+                    t.put("normal", coms.getNormal().getNombreCompleto());
+                    t.put("fecha", coms.getFechaHora().getTime()+"");
+                    
+                    comentarios.put("c"+i, t);
+                    i++;
+                }
+                comentarios.forEach((key, value) -> {System.out.println(key + " : " + value + " ");});
+                System.out.println("comentarios json : "+new Gson().toJson(comentarios));
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().print(new Gson().toJson(comentarios));
+                response.getWriter().flush();
+                System.out.println("Se envio comentarios en JSON");
+            }catch(Exception ex){            }
+        else
+            enviarRespuestaJson(request, response);
     }
     
     public void enviarRespuestaJson(HttpServletRequest request, HttpServletResponse response){
         Persistencia p = new FachadaPersistencia();
         var postsComun=new HashMap<String, HashMap>();
         try {
-            
-//          jc =new Gson().toJson((Comun)p.getAllAncladoPosts());
-//          ja =new Gson().toJson((Anclado)p.getAllAncladoPosts());
             var i = 0;
             for (var s :p.getAllComunPosts()){
                 var t = new HashMap<String, String>(); 
@@ -159,22 +196,18 @@ public class Inicio extends HttpServlet {
                 t.put("nombre", s.getUsuario().getNombreCompleto());
                 t.put("titulo", s.getTitulo());
                 t.put("conteindo", s.getContenido());
-
+                
                 postsComun.put(""+i, t);
                 i++;
             }
-                
-             System.out.println(postsComun);
-             System.out.println("json : "+new Gson().toJson(postsComun));
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        
-        response.getWriter().print(new Gson().toJson(postsComun));
-
-        response.getWriter().flush();
-             
+            postsComun.forEach((key, value) -> {System.out.println(key + " : " + value + " ");});
+            System.out.println("json : "+new Gson().toJson(postsComun));
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().print(new Gson().toJson(postsComun));
+            response.getWriter().flush();
+            System.out.println("Se envio respuesta en JSON");
         } catch (Exception ex) {System.out.println("algo malo paso"); 
-            ex.printStackTrace();
         }
     }
 

@@ -28,7 +28,6 @@ main{
 }
 img{
 	float: right;
-	margin-top: -20px;
 }
 .w{
 	width: 80%;
@@ -43,6 +42,7 @@ img{
 	padding: 10px;
 	border: solid black;
 	background-color: white;
+        font-size: 10px;
 }
 .in{
 	margin: 10px;

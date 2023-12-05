@@ -16,8 +16,7 @@
     <body>
         <%@include file="WEB-INF/Header.jspf" %>
         <main>
-            <h2>${requestScope.email}</h2>
-            <h2>${requestScope.password}</h2>
+            
 
             <button id="publicar" class="p">¡Vamos pública algo, haz clic aqui!</button>
                 

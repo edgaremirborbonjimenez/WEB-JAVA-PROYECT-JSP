@@ -22,7 +22,7 @@ function addGlobalListener(type,selector,callback){
         if(e.target.matches(selector))callback(e);
     });
 }
-
+//borra post
 addGlobalListener("click","img",e =>{
     console.log(e.target.parentNode.id);
     const data = {id: e.target.parentNode.id, borrar:"post"};
@@ -33,7 +33,7 @@ addGlobalListener("click","img",e =>{
     .then(res => res.json())
     .then(data => {
         
-        console.log(data.value);
+        console.log(data);
         document.getElementById(e.target.parentNode.id).remove();
         
      })
@@ -41,7 +41,56 @@ addGlobalListener("click","img",e =>{
          
      });
 });
+//comentar
+addGlobalListener("click","button",e =>{
+    e.preventDefault();    
+    var postid=e.target.parentNode.parentNode.id;
+    var input=document.getElementById("input"+postid);
+    
+    console.log(postid);
+    console.log(input.value);
+    const data = {id: postid, comentario: input.value};
+    fetch("Inicio",{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(data)})
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("input"+postid).value = '';
+        console.log(data);
+        mostrarPublicaciones(data);
+     })
+     .catch(error => {
+         
+     });
+});
+function getComentarios(idPost,comentarios){
+     const data = {idPost: idPost};
+    fetch("Inicio",{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(data)})
+    .then(res => res.json())
+    .then(data => {
+        //console.log(data);
 
+        for (var key in data) {
+            if (data.hasOwnProperty(key)) {
+                var valor = data[key];
+                    console.log(valor);
+                var pcom = document.createElement('p');
+                pcom.id=valor.postId+"-"+valor.id;
+                pcom.innerText+=valor.normal+": "+valor.contenido;
+                comentarios.appendChild(pcom);
+            }
+            
+        }
+        mostrarPublicaciones(data);
+     })
+     .catch(error => {
+         
+     });
+}
 function mostrarPublicaciones(data){
     
     for (var key in data) {
@@ -67,6 +116,7 @@ function mostrarPublicaciones(data){
             var comentarios = document.createElement('div');
                 comentarios.classList.add('coms');
                 comentarios.id = 'coms'+valor.id;
+                getComentarios(valor.id,comentarios);
             nuevaPublicacion.appendChild(comentarios);
                 
             var comentar = document.createElement('form');
