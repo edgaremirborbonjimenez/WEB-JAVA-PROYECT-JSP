@@ -9,7 +9,41 @@ fetch('Inicio', {
 .then(res => res.json())
 .then(data => {
     console.log(data);
-    //console.log(data);
+            mostrarPublicaciones(data);
+    })
+.catch(error => {
+});
+document.getElementById("publicar").addEventListener("click", function(event) {
+   location.href="crear-publicacion.jsp"; 
+});
+
+function addGlobalListener(type,selector,callback){
+    document.addEventListener(type , e=> {
+        if(e.target.matches(selector))callback(e);
+    });
+}
+
+addGlobalListener("click","img",e =>{
+    console.log(e.target.parentNode.id);
+    const data = {id: e.target.parentNode.id, borrar:"post"};
+    fetch("Inicio",{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(data)})
+    .then(res => res.json())
+    .then(data => {
+        
+        console.log(data.value);
+        document.getElementById(e.target.parentNode.id).remove();
+        
+     })
+     .catch(error => {
+         
+     });
+});
+
+function mostrarPublicaciones(data){
+    
     for (var key in data) {
         if (data.hasOwnProperty(key)) {
             var valor = data[key];
@@ -24,15 +58,11 @@ fetch('Inicio', {
                 basura.id='b'+valor.id;
                 basura.setAttribute('alt', 'b'+valor.id);
                 basura.src = 'https://cdn3.iconfinder.com/data/icons/user-interface-169/32/trash-512.png';
-                    basura.addEventListener("click" , e=> {
-                        console.log("sdssddds");
-                    });
                 nuevaPublicacion.appendChild(basura);
                 
             nuevaPublicacion.innerHTML += '<h5>'+valor.titulo+'</h5>';
             nuevaPublicacion.innerHTML += '<p>'+valor.conteindo+'</p>';
             nuevaPublicacion.innerHTML += '<p>'+"comentarios"+'</p>';
-            
             
             var comentarios = document.createElement('div');
                 comentarios.classList.add('coms');
@@ -56,23 +86,6 @@ fetch('Inicio', {
                 
             var puntoDeAnclaje = document.getElementById('publicaciones');
             puntoDeAnclaje.appendChild(nuevaPublicacion);
-            
-            
         }
     }
-    })
-.catch(error => {
-});
-document.getElementById("publicar").addEventListener("click", function(event) {
-   location.href="crear-publicacion.jsp"; 
-});
-
-function addGlobalListener(type,selector,callback){
-    document.addEventListener(type , e=> {
-        if(e.target.matches(selector))callback(e);
-    });
 }
-
-addGlobalListener("click","img",e =>{
-    console.log("eeee");
-});
