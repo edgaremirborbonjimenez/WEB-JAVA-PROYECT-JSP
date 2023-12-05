@@ -233,4 +233,9 @@ public class FachadaPersistencia implements Persistencia {
         }
     }
 
+    @Override
+    public Post getPostById(Long id) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }
