@@ -1,3 +1,6 @@
+
+<%@ page import="java.io.IOException" %>
+<%@ page import="java.io.PrintWriter" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es-MX">
@@ -6,10 +9,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Crear publicación</title>
         <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
-
         
     </head>
     <body>
+        <%
+
+            // Obtener el estado del usuario desde la sesión
+            boolean isAdmor = (boolean)request.getSession().getAttribute("isAdmor");
+
+            // Redirigir a la página correspondiente
+            if (isAdmor) {
+                response.sendRedirect("crear-publicacion-admor.jsp");
+            } 
+        %>
         <%@include file="WEB-INF/Header.jspf" %>
         <main class="main">
             <section class="main__section">
