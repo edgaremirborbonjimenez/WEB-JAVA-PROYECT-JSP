@@ -4,9 +4,11 @@
  */
 package serverlets;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import dao.interfaces.Persistencia;
+import domain.Comun;
 import domain.Normal;
-import domain.Usuario;
 import fachada.FachadaPersistencia;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,14 +18,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import utils.Utils;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author edemb
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
+@WebServlet(name = "CrearPostNormal", urlPatterns = {"/CrearPostNormal"})
+public class CrearPostNormal extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,7 +40,7 @@ public class Login extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processErrorRequest(HttpServletResponse response, String error)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -42,10 +48,10 @@ public class Login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Login</title>");
+            out.println("<title>Servlet CrearPostNormal</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Error " + error + "</h1>");
+            out.println("<h1>Servlet CrearPostNormal at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,8 +69,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        response.sendRedirect("/login.jsp");
+        processRequest(request, response);
     }
 
     /**
@@ -76,34 +81,37 @@ public class Login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        StringBuilder sb = new StringBuilder();
+        BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+        String line;
+        while ((line = br.readLine()) != null) {
+            sb.append(line);
+        }
+
+        Gson gson = new Gson();
+        JsonObject jsonBody = gson.fromJson(sb.toString(), JsonObject.class);
+
+        String titulo = jsonBody.get("titulo").getAsString();
+        String contenido = jsonBody.get("contenido").getAsString();
+
+        System.out.println(" titulo: " + titulo);
+        System.out.println(" contenido: " + contenido);
+        Persistencia p = new FachadaPersistencia();
         HttpSession session = request.getSession();
-
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        if (!Utils.isPasswordValid(password)) {
-            processErrorRequest(response, "Contraseña invalida, al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número");
-        }
-        if (!Utils.isEmailValid(email)) {
-            processErrorRequest(response, "Correo Electronico Invalido");
-        }
+        Normal usuarioNormal = (Normal) session.getAttribute("usuarioNormal");
+        Comun comun = new Comun();
+        comun.setTitulo(titulo);
+        comun.setUsuario(usuarioNormal);
+        comun.setFechaHoraCreacon(new Date());
+        comun.setContenido(contenido);
         try {
-
-            Persistencia p = new FachadaPersistencia();
-            Normal u = p.consultarUsuarioNormal(email, password);
-            if (u != null) {
-
-                session.setAttribute("usuarioNormal", u);
-                session.setAttribute("isAdmor", false);
-
-                response.sendRedirect("inicio.jsp");
-            }
-            processErrorRequest(response, "No se hayo tu usuario");
-
-        } catch (Exception e) {
-            processErrorRequest(response, e.getMessage());
+            p.crearPostComun(comun);
+        } catch (Exception ex) {
+            Logger.getLogger(CrearPostAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        System.out.println(usuarioNormal.getId());
 
     }
 

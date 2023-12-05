@@ -15,9 +15,8 @@
         <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
     </head>
     <body>
-        <header>
-            <span class="id">Feizbuk</span>
-        </header>
+        <%@include file="WEB-INF/Header.jspf" %>
+
         <main class="sigin">
             <form method="post" action="Sigin">
                 <div class="txtIS">Crear Sesión</div>

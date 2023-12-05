@@ -57,6 +57,40 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             return usuario;
         }
     }
+    
+        @Override
+    public Normal consultarUsuarioNormal(String correo, String contrasenia) {
+        Normal usuario = null;
+        try {
+            String query = "SELECT u FROM Normal u WHERE u.correo = :correo AND u.contraseña = :contraseña";
+            TypedQuery<Normal> consulta = entityManager.createQuery(query, Normal.class);
+            consulta.setParameter("correo", correo);
+            consulta.setParameter("contraseña", contrasenia);
+
+            usuario = consulta.getSingleResult();
+
+            return usuario;
+        } catch (Exception e) {
+            return usuario;
+        }
+    }
+    
+        @Override
+    public Admor consultarUsuarioAdmor(String correo, String contrasenia) {
+        Admor usuario = null;
+        try {
+            String query = "SELECT u FROM Admor u WHERE u.correo = :correo AND u.contraseña = :contraseña";
+            TypedQuery<Admor> consulta = entityManager.createQuery(query, Admor.class);
+            consulta.setParameter("correo", correo);
+            consulta.setParameter("contraseña", contrasenia);
+
+            usuario = consulta.getSingleResult();
+
+            return usuario;
+        } catch (Exception e) {
+            return usuario;
+        }
+    }
 
     @Override
     public Usuario conusltarUsuarioByCorreo(String correo) {

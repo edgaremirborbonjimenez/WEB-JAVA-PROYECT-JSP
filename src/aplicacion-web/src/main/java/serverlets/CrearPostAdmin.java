@@ -4,7 +4,6 @@
  */
 package serverlets;
 
-
 import domain.Admor;
 import fachada.FachadaPersistencia;
 import java.io.IOException;
@@ -16,10 +15,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import dao.interfaces.Persistencia;
 import domain.Anclado;
 import domain.Comun;
+import domain.Normal;
 import domain.Usuario;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,9 +35,9 @@ import org.apache.commons.io.IOUtils;
  */
 @WebServlet(name = "CrearPostAdmin", urlPatterns = {"/CrearPostAdmin"})
 public class CrearPostAdmin extends HttpServlet {
-    
+
     Persistencia fachadaPersistencia = new FachadaPersistencia();
-     Gson serializadorJSON = new Gson();
+    Gson serializadorJSON = new Gson();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -53,7 +56,7 @@ public class CrearPostAdmin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CrearPostAdmin</title>");            
+            out.println("<title>Servlet CrearPostAdmin</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CrearPostAdmin at " + request.getContextPath() + "</h1>");
@@ -72,8 +75,7 @@ public class CrearPostAdmin extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-        
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     /**
@@ -85,54 +87,46 @@ public class CrearPostAdmin extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-
-        HttpSession session = request.getSession();
-        
-        Usuario usuario = (Usuario) session.getAttribute("usuario");
-        if (usuario!=null) {
-            System.out.println(usuario.getId());
-            System.out.println(usuario.getNombreCompleto());
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        StringBuilder sb = new StringBuilder();
+        BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+        String line;
+        while ((line = br.readLine()) != null) {
+            sb.append(line);
         }
-        
-        /*
-        var correo = request.getParameter("correo");
-        var pass = request.getParameter("pass");
-        
-        var fachadaPersistenia = new FachadaPersistencia();
-        Comun comun = new Comun();
+
+        Gson gson = new Gson();
+        JsonObject jsonBody = gson.fromJson(sb.toString(), JsonObject.class);
+
+        String titulo = jsonBody.get("titulo").getAsString();
+        String contenido = jsonBody.get("contenido").getAsString();
+        boolean isAnclado = jsonBody.get("isAnclado").getAsBoolean();
+
+        System.out.println(" titulo: " + titulo);
+        System.out.println(" contenido: " + contenido);
+        Persistencia p = new FachadaPersistencia();
+        HttpSession session = request.getSession();
+        Admor usuarioAdmin = (Admor) session.getAttribute("usuarioNormal");
         try {
-            var user = fachadaPersistenia.consultarUsuario(correo, pass);
-            
-            comun.setUsuario(user);
-            comun.setContenido(request.getParameter("contenido"));
-            comun.setFechaHoraCreacon(new Date());
-            comun.setTitulo(request.getParameter("titulo"));
-            
-        } catch (Exception ex) {          }
-        response.setContentType("text/plain");
-        response.setCharacterEncoding("UTF-8");
-        if(comun.getId()!=null)
-            response.getWriter().write("Publicacion Creada");
-        else
-            response.getWriter().write("Hubo un problema al crear la publicacion");
-        System.out.println(comun.getId());
-        System.out.println(comun.getTitulo());
-        System.out.println(comun.getContenido());
-        System.out.println(comun.getUsuario().getCorreo());
-        System.out.println(comun.getFechaHoraCreacon());
-        
-        response.sendRedirect("Inicio.jsp");
-        */
-//        if (request.getParameter("correo") != null && request.getParameter("pass") != null)
-//            response.getWriter().write("Parámetros recibidos correctamente: correo=" + request.getParameter("correo") + ", id=" + request.getParameter("pass"));
-//        else 
-//            response.getWriter().write("Error: Faltan parámetros en la solicitud.");
-//       if (action != null && action.equalsIgnoreCase("crear-post-anclado")) {
-//            this.crearPublicacionAnclado(request, response);
-//            return;
-//        }
-        
+            if (isAnclado) {
+                Anclado anclado = new Anclado();
+                anclado.setAdmor(usuarioAdmin);
+                anclado.setContenido(contenido);
+                anclado.setFechaHoraCreacon(new Date());
+                anclado.setTitulo(titulo);
+                p.crearPostAnclado(anclado);
+            } else {
+                Comun comun = new Comun();
+                comun.setTitulo(titulo);
+                comun.setUsuario(usuarioAdmin);
+                comun.setFechaHoraCreacon(new Date());
+                comun.setContenido(contenido);
+                p.crearPostComun(comun);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(CrearPostAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -144,33 +138,5 @@ public class CrearPostAdmin extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    private void crearPublicacionAnclado(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        String body = IOUtils.toString(request.getInputStream(), "utf-8");
-
-        HttpSession session = request.getSession();
-
-        Admor admin = (Admor) session.getAttribute("usuario");
-
-        Anclado postAnclado = new Anclado();
-
-        postAnclado.setAdmor(admin);
-
-        try {
-
-            fachadaPersistencia.crearPostAnclado(postAnclado);
-
-        } catch (Exception e) {
-
-        }
-
-       String respuestaJson = serializadorJSON.toJson(postAnclado);
-
-        try (PrintWriter out = response.getWriter()) {
-            out.write(respuestaJson);
-        }
-    }
 
 }

@@ -14,5 +14,9 @@ public interface UsuarioDAO {
 
     public Usuario consultarUsuario(String correo, String contrasenia);
 
+    public Normal consultarUsuarioNormal(String correo, String contrasenia);
+
+    public Admor consultarUsuarioAdmor(String correo, String contrasenia);
+
     public Usuario conusltarUsuarioByCorreo(String correo);
 }

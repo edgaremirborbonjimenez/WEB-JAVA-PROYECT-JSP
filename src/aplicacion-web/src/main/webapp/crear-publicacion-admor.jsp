@@ -25,6 +25,9 @@
                             <label class="main__section-form-contenido-label" for="contenido">Contenido:</label>
                                 <textarea class="main__section-form-contenido-textarea" name="contenido" id="contenido" cols="30" rows="10" placeholder="¿Qué estás pensando?"></textarea>
                         </div>
+                        <div>
+                            <input type="checkbox" id="isAnclado">
+                        </div>
                         <div class="main__section-form-publicar">
                             <button class="main__section-form-publicar-confirmar" id="btn-guardar-post" type="submit">Publicar</button>
                             <div class="main__section-form-publicar-cancelar" id="btn-cancelar-post"><a href="inicio.jsp">Cancelar</a></div>
