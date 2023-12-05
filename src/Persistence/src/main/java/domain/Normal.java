@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "normals")
 public class Normal extends Usuario implements Serializable {
 
-    @OneToMany(mappedBy = "normal")
+    @OneToMany(mappedBy = "normal",cascade = CascadeType.REMOVE)
     List<Comentario> comentarios;
 
     public Normal() {

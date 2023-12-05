@@ -26,7 +26,7 @@ public class Comun extends Post implements Serializable {
     @JoinColumn(name = "usuarioID", nullable = false)
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "comun")
+    @OneToMany(mappedBy = "comun",cascade = CascadeType.REMOVE)
     List<Comentario> comentarios;
 
     public Comun() {

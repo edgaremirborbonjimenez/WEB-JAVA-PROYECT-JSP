@@ -124,7 +124,7 @@ public class Testing {
         Comun post = null;
         try {
             user = (Normal) fachadaPersistenia.consultarUsuario("juanperez@gmail.com", "1234");
-            post = (Comun) fachadaPersistenia.getPostById(2L);
+            post = (Comun) fachadaPersistenia.getPostComunById(2L);
             Comentario c = new Comentario();
             c.setNormal(user);
             c.setFechaHora(new Date());
@@ -242,7 +242,7 @@ public class Testing {
     public void eliminarPublicacion() {
         Post post = null;
         try {
-            post = fachadaPersistenia.eliminarPost(4L);
+            post = fachadaPersistenia.eliminarPost(2L);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -253,7 +253,7 @@ public class Testing {
     public void eliminarComentario() {
         Comentario comentario = null;
         try {
-            comentario = fachadaPersistenia.eliminarComentario(1L);
+            comentario = fachadaPersistenia.eliminarComentario(3L);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
