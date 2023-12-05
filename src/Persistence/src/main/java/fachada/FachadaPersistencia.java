@@ -63,6 +63,26 @@ public class FachadaPersistencia implements Persistencia {
     }
 
     @Override
+    public Normal consultarUsuarioNormal(String correo, String contrasenia) throws Exception {
+        try {
+            return usuarioDAO.consultarUsuarioNormal(correo, contrasenia);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+
+        }
+    }
+
+    @Override
+    public Admor consultarUsuarioAdmor(String correo, String contrasenia) throws Exception {
+        try {
+            return usuarioDAO.consultarUsuarioAdmor(correo, contrasenia);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+
+        }
+    }
+
+    @Override
     public Usuario consultarUsuarioByEmail(String correo) throws Exception {
         try {
             return usuarioDAO.conusltarUsuarioByCorreo(correo);

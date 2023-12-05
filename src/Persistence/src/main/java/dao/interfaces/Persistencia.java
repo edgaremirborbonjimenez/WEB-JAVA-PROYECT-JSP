@@ -29,10 +29,14 @@ public interface Persistencia {
 
     Usuario consultarUsuario(String correo, String contrasenia) throws Exception;
 
+    Normal consultarUsuarioNormal(String correo, String contrasenia) throws Exception;
+
+    Admor consultarUsuarioAdmor(String correo, String contrasenia) throws Exception;
+
     Usuario consultarUsuarioByEmail(String correo) throws Exception;
 
     Comun crearPostComun(Comun post) throws Exception;
-    
+
     Anclado crearPostAnclado(Anclado post) throws Exception;
 
     Post eliminarPost(Long id) throws Exception;

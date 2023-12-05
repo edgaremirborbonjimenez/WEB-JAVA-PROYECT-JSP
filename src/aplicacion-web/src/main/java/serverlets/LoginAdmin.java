@@ -5,8 +5,8 @@
 package serverlets;
 
 import dao.interfaces.Persistencia;
+import domain.Admor;
 import domain.Normal;
-import domain.Usuario;
 import fachada.FachadaPersistencia;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,8 +22,8 @@ import utils.Utils;
  *
  * @author edemb
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
+@WebServlet(name = "LoginAdmin", urlPatterns = {"/LoginAdmin"})
+public class LoginAdmin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -64,7 +64,6 @@ public class Login extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        response.sendRedirect("/login.jsp");
     }
 
     /**
@@ -78,6 +77,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         HttpSession session = request.getSession();
 
         String email = request.getParameter("email");
@@ -91,12 +91,11 @@ public class Login extends HttpServlet {
         try {
 
             Persistencia p = new FachadaPersistencia();
-            Normal u = p.consultarUsuarioNormal(email, password);
+            Admor u = p.consultarUsuarioAdmor(email, password);
             if (u != null) {
 
-                session.setAttribute("usuarioNormal", u);
-                session.setAttribute("isAdmor", false);
-
+                session.setAttribute("usuarioAdmor", u);
+                session.setAttribute("isAdmor", true);
                 response.sendRedirect("inicio.jsp");
             }
             processErrorRequest(response, "No se hayo tu usuario");
