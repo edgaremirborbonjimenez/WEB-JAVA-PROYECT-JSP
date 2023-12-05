@@ -19,7 +19,7 @@
             <h2>${requestScope.email}</h2>
             <h2>${requestScope.password}</h2>
 
-		<button class="p">¡Vamos pública algo, haz clic aqui!</button>
+            <button id="publicar" class="p">¡Vamos pública algo, haz clic aqui!</button>
                 
                 <div id="publicaciones"></div>
 
