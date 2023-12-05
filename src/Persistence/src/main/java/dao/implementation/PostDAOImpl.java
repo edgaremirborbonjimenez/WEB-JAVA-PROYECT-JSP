@@ -75,11 +75,11 @@ public class PostDAOImpl implements PostDAO {
     }
 
     @Override
-    public Post getPostById(Long id) {
+    public Comun getPostComunById(Long id) {
 
         entityManager.getTransaction().begin();
 
-        Post post = entityManager.find(Post.class, id);
+        Comun post = entityManager.find(Comun.class, id);
 
         entityManager.getTransaction().commit();
 

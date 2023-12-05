@@ -162,10 +162,10 @@ public class FachadaPersistencia implements Persistencia {
     }
 
     @Override
-    public Post getPostById(Long id) throws Exception {
+    public Comun getPostComunById(Long id) throws Exception {
 
         try {
-            return postDAO.getPostById(id);
+            return postDAO.getPostComunById(id);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

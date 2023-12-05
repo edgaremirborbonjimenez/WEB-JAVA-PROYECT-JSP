@@ -43,8 +43,9 @@ public interface Persistencia {
 
     Post editarPost(Long id, String titulo, String contenido) throws Exception;
 
-        Post getPostById(Long id) throws Exception;
+  Post getPostById(Long id) throws Exception;
 
+    Comun getPostComunById(Long id) throws Exception;
 
     Municipio registrarMunicipio(Municipio municipio) throws Exception;
 
