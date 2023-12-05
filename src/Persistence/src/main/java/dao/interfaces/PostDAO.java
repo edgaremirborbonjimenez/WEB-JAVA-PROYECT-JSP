@@ -17,7 +17,7 @@ public interface PostDAO {
     
     public Post editarPost(Long id, String titulo, String contenido);
     
-    public Post getPostById(Long id);
+    public Comun getPostComunById(Long id);
     
     public List<Post> getAllPosts();
     
