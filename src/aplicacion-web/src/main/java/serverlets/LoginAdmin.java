@@ -94,7 +94,7 @@ public class LoginAdmin extends HttpServlet {
             Admor u = p.consultarUsuarioAdmor(email, password);
             if (u != null) {
 
-                session.setAttribute("usuarioAdmor", u);
+                session.setAttribute("usuario", u);
                 session.setAttribute("isAdmor", true);
                 response.sendRedirect("inicio.jsp");
             }

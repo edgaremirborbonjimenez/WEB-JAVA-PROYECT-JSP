@@ -101,12 +101,14 @@ public class CrearPostAdmin extends HttpServlet {
         String titulo = jsonBody.get("titulo").getAsString();
         String contenido = jsonBody.get("contenido").getAsString();
         boolean isAnclado = jsonBody.get("isAnclado").getAsBoolean();
-
+        
+        System.out.println(isAnclado);
         System.out.println(" titulo: " + titulo);
         System.out.println(" contenido: " + contenido);
         Persistencia p = new FachadaPersistencia();
         HttpSession session = request.getSession();
-        Admor usuarioAdmin = (Admor) session.getAttribute("usuarioNormal");
+        Admor usuarioAdmin = (Admor) session.getAttribute("usuario");
+        System.out.println(usuarioAdmin.getNombreCompleto());
         try {
             if (isAnclado) {
                 Anclado anclado = new Anclado();

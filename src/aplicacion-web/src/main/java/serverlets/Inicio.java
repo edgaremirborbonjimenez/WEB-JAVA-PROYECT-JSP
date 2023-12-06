@@ -138,7 +138,7 @@ public class Inicio extends HttpServlet {
                 c.setFechaHora(new Date());
                 c.setContenido(jsonBody.get("comentario").getAsString());
                 c.setComun(post);
-                c.setNormal((Normal)request.getSession().getAttribute("usuarioNormal"));
+                c.setNormal((Normal)request.getSession().getAttribute("usuario"));
                 p.crearComentario(c);
                 
                 System.out.println("En la publicacion "+post.getId()+" se comento: ");

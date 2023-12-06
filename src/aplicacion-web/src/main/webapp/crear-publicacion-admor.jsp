@@ -49,6 +49,6 @@
                 </div>
             </section>
         </main>
-        <script src="crearPublicaciones.js" type="module"></script>
+        <script src="crearPublicacionesAdmor.js" type="module"></script>
     </body>
 </html>

@@ -3,11 +3,9 @@
   
    const titulo = document.getElementById("titulo").value;
    const contenido = document.getElementById("contenido").value;
-      const isAnclado = document.getElementById("isAnclado").checked;
-
-    const postObj = {};
-    /*let post = JSON.stringify(postObj);
-       */
+   const isAnclado = document.getElementById("isAnclado").checked;
+   console.log(isAnclado);
+    let postObj = {};
       const url = "http://localhost:8080/aplicacion-web/CrearPostAdmin";
     if (isAnclado) {
         postObj = {
@@ -22,11 +20,11 @@
     
     
 }else{
-                postObj = {
+        postObj = {
         titulo : titulo,
         contenido: contenido,
         isAnclado: false
-    }
+        }
     
     let xhr = new XMLHttpRequest();
     xhr.open('POST', url, true)

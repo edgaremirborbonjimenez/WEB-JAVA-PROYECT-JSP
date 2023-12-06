@@ -94,7 +94,7 @@ public class Login extends HttpServlet {
             Normal u = p.consultarUsuarioNormal(email, password);
             if (u != null) {
 
-                session.setAttribute("usuarioNormal", u);
+                session.setAttribute("usuario", u);
                 session.setAttribute("isAdmor", false);
 
                 response.sendRedirect("inicio.jsp");
